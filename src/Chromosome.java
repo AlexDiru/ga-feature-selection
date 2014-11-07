@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chromosome {
+public class Chromosome implements Comparable<Chromosome> {
 
     private List<Integer> features = new ArrayList<Integer>();
     private double fitness = -1;
@@ -22,5 +22,14 @@ public class Chromosome {
 
     public void setFitness(double fitness) {
         this.fitness = fitness;
+    }
+
+    public int getRandomFeatureIndex() {
+        return features.get((int)(Math.random() * features.size()));
+    }
+
+    @Override
+    public int compareTo(Chromosome o) {
+        return Double.compare(fitness, o.fitness);
     }
 }

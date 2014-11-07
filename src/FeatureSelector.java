@@ -2,6 +2,7 @@ import libsvm.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 //http://stackoverflow.com/questions/10792576/libsvm-java-implementation
@@ -60,7 +61,7 @@ public class FeatureSelector {
                 for (Integer x : population.get(i).getFeatureIndices())
                     System.out.print(x + ", ");
                 System.out.println();*/
-                System.out.println("Accuracy: " + accuracyTrain + "\t" + accuracyTest);
+                //System.out.println("Accuracy: " + accuracyTrain + "\t" + accuracyTest);
 
                 if (accuracyTest > bestAccuracy)
                     bestAccuracy = accuracyTest;
@@ -72,7 +73,66 @@ public class FeatureSelector {
             System.out.println("Best accuracy of Generation " + generation + ": " + bestAccuracy);
 
 
+            //Breed using proportional roulette wheel selection
+            List<Chromosome> children = new ArrayList<Chromosome>();
+            //Sort chromosomes according to fitness
+            Collections.sort(population);
+            while (children.size() < populationSize) {
+                Chromosome father, mother;
+                do {
+                    father = ParentSelector.select(population, ParentSelector.ROULETTE_WHEEL);
+                    mother = ParentSelector.select(population, ParentSelector.ROULETTE_WHEEL);
+                } while (father == mother);
+
+                children.add(crossover(father, mother));
+            }
+
+            population = children;
+
         }
+
+    }
+
+    public Chromosome crossover(Chromosome father, Chromosome mother) {
+
+        List<Integer> genes = new ArrayList<Integer>();
+
+        /*int splitPointF = (int)(Math.random() * father.getFeatureIndices().size());
+        int splitPointM = (int)(Math.random() * mother.getFeatureIndices().size());
+
+        if (Math.random() < 0.5) {
+            for (int i = 0; i < splitPointF; i++)
+                if (!genes.contains(father.getFeatureIndices().get(i)))
+                    genes.add(father.getFeatureIndices().get(i));
+
+            for (int i = splitPointM; i < mother.getFeatureIndices().size(); i++)
+                if (!genes.contains(mother.getFeatureIndices().get(i)))
+                    genes.add(mother.getFeatureIndices().get(i));
+        } else {
+            for (int i = 0; i < splitPointM; i++)
+                if (!genes.contains(mother.getFeatureIndices().get(i)))
+                    genes.add(mother.getFeatureIndices().get(i));
+
+            for (int i = splitPointF; i < father.getFeatureIndices().size(); i++)
+                if (!genes.contains(father.getFeatureIndices().get(i)))
+                    genes.add(father.getFeatureIndices().get(i));
+
+        }
+        */
+
+        while (genes.size() < father.getFeatureIndices().size()) {
+            int index;
+            if (Math.random() < 0.5)
+                index = father.getRandomFeatureIndex();
+            else
+                index = mother.getRandomFeatureIndex();
+
+            if (!genes.contains(index))
+                genes.add(index);
+        }
+
+        return new Chromosome(genes);
+
 
     }
 
