@@ -4,14 +4,14 @@ public class ParentSelector {
 
     public static final int ROULETTE_WHEEL = 0;
 
-    public static Chromosome select(List<Chromosome> parents, int method) {
+    public static IChromosome select(List<IChromosome> parents, int method) {
         if (method == ROULETTE_WHEEL) {
             return selectRouletteWheel(parents);
         } else
             return null;
     }
 
-    private static Chromosome selectRouletteWheel(List<Chromosome> parents) {
+    private static IChromosome selectRouletteWheel(List<IChromosome> parents) {
         //Top 20 = 30%
         //Top 20 - 40 = 25%
         //Top 40 - 60 = 20%
@@ -32,7 +32,7 @@ public class ParentSelector {
             return selectInQuartiles(parents,0.8,1);
     }
 
-    private static Chromosome selectInQuartiles(List<Chromosome> parents, double lq, double uq) {
+    private static IChromosome selectInQuartiles(List<IChromosome> parents, double lq, double uq) {
         int minSize = (int)(lq * parents.size());
         int maxSize = (int)(uq * parents.size());
 

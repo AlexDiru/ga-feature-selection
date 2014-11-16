@@ -49,13 +49,16 @@ public class FeatureSelector {
 
     public void run() {
 
-        List<Chromosome> population = initialisePopulation();
-
+        //List<Chromosome> population = initialisePopulation();
+        List<IChromosome> population = new ArrayList<IChromosome>();
+        for (int i = 0; i < populationSize; i++)
+            population.add(new BitStringChromosome(totalFeatureCount - IGNORE_FIRST_N_FEATURES).init());
 
         while (generation < 50) {
             double bestAccuracy = -1;
 
-            Chromosome.resetFitness(population);
+            for (int i = 0; i < populationSize; i++)
+                population.get(i).setFitness(-1);
 
             for (int i = 0; i < population.size(); i++) {
 
@@ -81,17 +84,22 @@ public class FeatureSelector {
 
 
             //Breed using proportional roulette wheel selection
-            List<Chromosome> children = new ArrayList<Chromosome>();
+            List<IChromosome> children = new ArrayList<IChromosome>();
             //Sort chromosomes according to fitness
             Collections.sort(population);
             while (children.size() < populationSize) {
-                Chromosome father, mother;
+                IChromosome father, mother;
                 do {
                     father = ParentSelector.select(population, ParentSelector.ROULETTE_WHEEL);
                     mother = ParentSelector.select(population, ParentSelector.ROULETTE_WHEEL);
                 } while (father == mother);
 
-                children.add(crossover(father, mother));
+                if (population.get(0) instanceof BitStringChromosome)
+                    children.add(BitStringChromosome.crossover((BitStringChromosome) father, (BitStringChromosome) mother));
+                else {
+                    children.add(crossover((Chromosome) father, (Chromosome) mother));
+                    ((BitStringChromosome)children.get(children.size()-1)).mutate();
+                }
             }
 
             population = children;

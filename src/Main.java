@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        FeatureSelector fs = new FeatureSelector(500,new TerminationCriteria(),0,0,0,0.1f);
+        FeatureSelector fs = new FeatureSelector(50,new TerminationCriteria(),0,0,0,0.1f);
         fs.run();
 
     }
