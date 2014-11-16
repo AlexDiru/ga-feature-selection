@@ -8,10 +8,17 @@ import java.util.List;
 public class BitStringChromosome implements IChromosome {
 
     public static final int NUMBER_OF_BITS_TO_MUTATE = 3;
-    public static final int N_FOR_N_POINT_CROSSOVER = 1;
+    public static int N_FOR_N_POINT_CROSSOVER = 1;
 
     private boolean[] bits;
     private double fitness;
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < size(); i++)
+            sb.append(bits[i] ? "1" : "0");
+        return sb.toString();
+    }
 
     public void setFitness(double fitness) {
         this.fitness = fitness;
@@ -83,14 +90,19 @@ public class BitStringChromosome implements IChromosome {
     //n point crossover
     public static BitStringChromosome crossover(BitStringChromosome a, BitStringChromosome b) {
 
-        int[] crossoverIndices = ArrayHelper.getRandomUniqueIndices(N_FOR_N_POINT_CROSSOVER,a.size());
+        System.out.println("a: " + a.toString());
+        System.out.println("b: " + b.toString());
+
+        int[] crossoverIndices = ArrayHelper.getRandomUniqueIndices(N_FOR_N_POINT_CROSSOVER,a.size() - 2);
         Arrays.sort(crossoverIndices);
+
+        System.out.println("Crossover Indices: " + Arrays.toString(crossoverIndices));
 
         BitStringChromosome c = new BitStringChromosome(a.size());
 
         int current = 0;
         for (int crossoverIndex = 0; crossoverIndex < crossoverIndices.length; crossoverIndex++)
-            for (current = current; current < crossoverIndices[crossoverIndex]; current++)
+            for (current = current; current < crossoverIndices[crossoverIndex] + 1; current++)
                 c.setBit(current, crossoverIndex % 2 == 0 ? a.getBit(current) : b.getBit(current));
 
         return c;

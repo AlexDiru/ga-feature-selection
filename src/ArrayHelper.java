@@ -6,11 +6,11 @@ public class ArrayHelper {
     public static int[] getRandomUniqueIndices(int count, int upperBoundExclusive) {
         int[] retval = new int[count];
 
-        retval[0] = (int)(Math.random() * count);
+        retval[0] = (int)(Math.random() * upperBoundExclusive);
 
         for (int i = 1; i < count; i++) {
             while (true) {
-                retval[i] = (int) (Math.random() * count);
+                retval[i] = (int) (Math.random() * upperBoundExclusive);
                 //check if already exists
                 for (int j = 0; j < i; j++)
                     if (retval[j] == retval[i])
