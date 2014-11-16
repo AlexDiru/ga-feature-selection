@@ -90,20 +90,21 @@ public class BitStringChromosome implements IChromosome {
     //n point crossover
     public static BitStringChromosome crossover(BitStringChromosome a, BitStringChromosome b) {
 
-        System.out.println("a: " + a.toString());
-        System.out.println("b: " + b.toString());
 
-        int[] crossoverIndices = ArrayHelper.getRandomUniqueIndices(N_FOR_N_POINT_CROSSOVER,a.size() - 2);
+        int[] crossoverIndices = ArrayHelper.getRandomUniqueIndices(N_FOR_N_POINT_CROSSOVER + 1,a.size() - 2);
+        crossoverIndices[crossoverIndices.length - 1]  = a.size() - 1; //this makes it work otherwise the next for loop exits early
         Arrays.sort(crossoverIndices);
 
-        System.out.println("Crossover Indices: " + Arrays.toString(crossoverIndices));
 
         BitStringChromosome c = new BitStringChromosome(a.size());
 
-        int current = 0;
+        int prev = 0;
         for (int crossoverIndex = 0; crossoverIndex < crossoverIndices.length; crossoverIndex++)
-            for (current = current; current < crossoverIndices[crossoverIndex] + 1; current++)
-                c.setBit(current, crossoverIndex % 2 == 0 ? a.getBit(current) : b.getBit(current));
+            for (int current = prev; current < crossoverIndices[crossoverIndex] + 1; current++) {
+                boolean bitValue = crossoverIndex % 2 == 0 ? a.getBit(current) : b.getBit(current);
+                c.setBit(current, bitValue);
+                prev++;
+            }
 
         return c;
     }
