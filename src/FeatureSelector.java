@@ -15,12 +15,6 @@ import java.util.List;
 
 public class FeatureSelector {
 
-    private static final int NUM_THREADS = 4;
-
-    public static final int __SVM = 0;
-    public static final int __DECISION_TREE = 1;
-
-    public static final int CLASSIFICATION_METHOD = 1;
 
     private final float mutationRate;
     private final int mutationMethod;
@@ -56,6 +50,8 @@ public class FeatureSelector {
         for (int i = 0; i < populationSize; i++)
             population.add(new BitStringChromosome(dataReader.getFeatureCount()).init());
 
+        System.out.println(GeneticParameters.toText());
+
         while (true) {
             double bestAccuracy = -1;
 
@@ -63,15 +59,15 @@ public class FeatureSelector {
                 population.get(i).setFitness(-1);
 
             //Evaluate in parallel
-            Thread[] evals = new Thread[NUM_THREADS];
-            for (int i = 0; i < NUM_THREADS; i++) {
-                int fromIndex = (int)(i * ((double)populationSize/NUM_THREADS));
-                int toIndex = (int)((i+1) * ((double)populationSize/NUM_THREADS));
+            Thread[] evals = new Thread[GeneticParameters.threadCount];
+            for (int i = 0; i < evals.length; i++) {
+                int fromIndex = (int)(i * ((double)populationSize/evals.length));
+                int toIndex = (int)((i+1) * ((double)populationSize/evals.length));
                 evals[i] = new Thread(new ParallelEvaluator(dataReader, population.subList(fromIndex, toIndex)));
                 evals[i].start();
             }
 
-            for (int i = 0; i < NUM_THREADS; i++)
+            for (int i = 0; i < evals.length; i++)
                 try {
                     evals[i].join();
                 } catch (InterruptedException e) {
@@ -86,7 +82,7 @@ public class FeatureSelector {
             //Sort chromosomes according to fitness
             Collections.sort(population);
 
-            System.out.println("Best/Worst accuracy of Generation " + generation + ": " + population.get(0).getFitness() + "\t" + population.get(population.size() - 1).getFitness());
+            System.out.println( generation + "," + population.get(population.size() - 1).getFitness());
 
             while (children.size() < populationSize) {
                 IChromosome father, mother;

@@ -21,10 +21,10 @@ public class ParallelEvaluator implements Runnable {
             double accuracyTrain = 0;
             double accuracyTest = 0;
 
-            if (FeatureSelector.CLASSIFICATION_METHOD == FeatureSelector.__SVM) {
+            if (GeneticParameters.classificationMethod == GeneticParameters.__SVM) {
                 //svm_model model = SVM.create(dataReader, population.get(i).getFeatureIndices());
                 //accuracyTrain = SVM.eval(model, population.get(i).getFeatureIndices(), dataReader.getTrainingRecords());
-            } else if (FeatureSelector.CLASSIFICATION_METHOD == FeatureSelector.__DECISION_TREE) {
+            } else if (GeneticParameters.classificationMethod == GeneticParameters.__DECISION_TREE) {
                 Classifier model = new J48();
                 FastVector predictions = new FastVector();
 

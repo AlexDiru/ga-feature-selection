@@ -20,13 +20,13 @@ public class ParentSelector {
 
         double p = Math.random();
 
-        if (p < 0.1)
+        if (p < 0.05)
             return selectInQuartiles(parents, 0, 0.2);
-        else if (p < 0.25)
+        else if (p < 0.20)
             return selectInQuartiles(parents,0.2,0.4);
-        else if (p < 0.45)
+        else if (p < 0.40)
             return selectInQuartiles(parents,0.4,0.6);
-        else if (p < 0.7)
+        else if (p < 0.65)
             return selectInQuartiles(parents,0.6,0.8);
         else
             return selectInQuartiles(parents,0.8,1);

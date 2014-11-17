@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DataReader {
 
-    private static final int K_FOLDS = 10;
+    public static final int K_FOLDS = 10;
 
     public Instances[] getTrainingInstances() {
         return trainingInstances;
