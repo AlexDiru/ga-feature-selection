@@ -1,3 +1,6 @@
+import weka.core.Instance;
+import weka.core.Instances;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +10,7 @@ import java.util.List;
  */
 public class BitStringChromosome implements IChromosome {
 
-    public static final int NUMBER_OF_BITS_TO_MUTATE = 3;
+    public static final int NUMBER_OF_BITS_TO_MUTATE = 1;
     public static int N_FOR_N_POINT_CROSSOVER = 1;
 
     private boolean[] bits;
@@ -73,6 +76,23 @@ public class BitStringChromosome implements IChromosome {
         }
     }
 
+    @Override
+    public Instances getFeatureSubset(final Instances instances) {
+
+        Instances subset = new Instances(instances);
+
+        int x = 0;
+        for (int i = 0; i < size(); i++) {
+            if (!bits[i]) {
+                subset.deleteAttributeAt(x);
+                x--;
+            }
+            x++;
+        }
+        return subset;
+
+    }
+
     public int size() {
         return bits.length;
     }
@@ -90,21 +110,29 @@ public class BitStringChromosome implements IChromosome {
     //n point crossover
     public static BitStringChromosome crossover(BitStringChromosome a, BitStringChromosome b) {
 
-
-        int[] crossoverIndices = ArrayHelper.getRandomUniqueIndices(N_FOR_N_POINT_CROSSOVER + 1,a.size() - 2);
-        crossoverIndices[crossoverIndices.length - 1]  = a.size() - 1; //this makes it work otherwise the next for loop exits early
-        Arrays.sort(crossoverIndices);
-
-
         BitStringChromosome c = new BitStringChromosome(a.size());
 
-        int prev = 0;
-        for (int crossoverIndex = 0; crossoverIndex < crossoverIndices.length; crossoverIndex++)
-            for (int current = prev; current < crossoverIndices[crossoverIndex] + 1; current++) {
-                boolean bitValue = crossoverIndex % 2 == 0 ? a.getBit(current) : b.getBit(current);
-                c.setBit(current, bitValue);
-                prev++;
-            }
+        if (GeneticParameters.crossoverMethod == GeneticParameters.CROSSOVER_METHOD_N_POINT) {
+
+            int[] crossoverIndices = ArrayHelper.getRandomUniqueIndices(N_FOR_N_POINT_CROSSOVER + 1, a.size() - 2);
+            crossoverIndices[crossoverIndices.length - 1] = a.size() - 1; //this makes it work otherwise the next for loop exits early
+            Arrays.sort(crossoverIndices);
+
+            int prev = 0;
+            for (int crossoverIndex = 0; crossoverIndex < crossoverIndices.length; crossoverIndex++)
+                for (int current = prev; current < crossoverIndices[crossoverIndex] + 1; current++) {
+                    boolean bitValue = crossoverIndex % 2 == 0 ? a.getBit(current) : b.getBit(current);
+                    c.setBit(current, bitValue);
+                    prev++;
+                }
+
+        } else if (GeneticParameters.crossoverMethod == GeneticParameters.CROSSOVER_METHOD_HALFWAY) {
+            int crossoverIndex = a.size() / 2;
+            for (int i = 0; i < crossoverIndex; i++)
+                c.setBit(i, a.getBit(i));
+            for (int i = crossoverIndex; i < a.size(); i++)
+                c.setBit(i, b.getBit(i));
+        }
 
         return c;
     }

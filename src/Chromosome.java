@@ -1,3 +1,5 @@
+import weka.core.Instances;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,16 @@ public class Chromosome implements IChromosome {
 
     public double getFitness() {
         return fitness;
+    }
+
+    @Override
+    public void mutate() {
+
+    }
+
+    @Override
+    public Instances getFeatureSubset(Instances instances) {
+        return null;
     }
 
     @Override

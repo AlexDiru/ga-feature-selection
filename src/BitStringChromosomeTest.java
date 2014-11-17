@@ -8,6 +8,7 @@ public class BitStringChromosomeTest {
 
     @Test
     public void testCrossover() {
+        GeneticParameters.crossoverMethod = GeneticParameters.CROSSOVER_METHOD_N_POINT;
         BitStringChromosome.N_FOR_N_POINT_CROSSOVER = 1;
 
         BitStringChromosome a = new BitStringChromosome(4);
@@ -26,6 +27,7 @@ public class BitStringChromosomeTest {
 
     @Test
     public void testCrossoverHard() {
+        GeneticParameters.crossoverMethod = GeneticParameters.CROSSOVER_METHOD_N_POINT;
         //If N_POINT is odd, first bit should be false, last true
         //If even, first false, last false
 
@@ -40,15 +42,31 @@ public class BitStringChromosomeTest {
                 b.setBit(x, true);
             }
 
-                BitStringChromosome c = BitStringChromosome.crossover(a, b);
+            BitStringChromosome c = BitStringChromosome.crossover(a, b);
 
-                if (BitStringChromosome.N_FOR_N_POINT_CROSSOVER % 2 == 1) {
-                    Assert.assertTrue(!c.getBit(0));
-                    Assert.assertTrue(c.getBit(799));
-                } else {
-                    Assert.assertTrue(!c.getBit(0));
-                    Assert.assertTrue(!c.getBit(799));
-                }
+            if (BitStringChromosome.N_FOR_N_POINT_CROSSOVER % 2 == 1) {
+                Assert.assertTrue(!c.getBit(0));
+                Assert.assertTrue(c.getBit(799));
+            } else {
+                Assert.assertTrue(!c.getBit(0));
+                Assert.assertTrue(!c.getBit(799));
             }
+        }
+
+        GeneticParameters.crossoverMethod = GeneticParameters.CROSSOVER_METHOD_HALFWAY;
+        for (int i = 0; i < 100; i++) {
+
+            BitStringChromosome a = new BitStringChromosome(800);
+            BitStringChromosome b = new BitStringChromosome(800);
+            for (int x = 0;x < 800; x++) {
+                a.setBit(x, false);
+                b.setBit(x, true);
+            }
+
+            BitStringChromosome c = BitStringChromosome.crossover(a, b);
+
+            Assert.assertTrue(!c.getBit(0));
+            Assert.assertTrue(c.getBit(799));
+        }
     }
 }

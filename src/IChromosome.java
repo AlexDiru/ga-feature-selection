@@ -1,3 +1,5 @@
+import weka.core.Instances;
+
 import java.util.List;
 
 /**
@@ -9,4 +11,8 @@ public interface IChromosome extends Comparable<IChromosome> {
     void setFitness(double d);
 
     double getFitness();
+
+    void mutate();
+
+    Instances getFeatureSubset(Instances instances);
 }

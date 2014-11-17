@@ -1,4 +1,10 @@
 import libsvm.*;
+import weka.classifiers.Classifier;
+import weka.classifiers.Evaluation;
+import weka.classifiers.evaluation.NominalPrediction;
+import weka.classifiers.trees.J48;
+import weka.core.FastVector;
+import weka.core.Instances;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,12 +15,12 @@ import java.util.List;
 
 public class FeatureSelector {
 
-    private static final int IGNORE_FIRST_N_FEATURES = 4;
+    private static final int NUM_THREADS = 4;
 
-    private static final int __SVM = 0;
-    private static final int __DECISION_TREE = 1;
+    public static final int __SVM = 0;
+    public static final int __DECISION_TREE = 1;
 
-    private static final int CLASSIFICATION_METHOD = 0;
+    public static final int CLASSIFICATION_METHOD = 1;
 
     private final float mutationRate;
     private final int mutationMethod;
@@ -23,7 +29,6 @@ public class FeatureSelector {
     private final TerminationCriteria terminationCriteria;
     private final int populationSize;
     private DataReader dataReader;
-    private int totalFeatureCount;
     private int generation = 0;
 
     public FeatureSelector(int populationSize, TerminationCriteria terminationCriteria, int fitnessFunctionMethod, int crossoverMethod, int mutationMethod,
@@ -43,50 +48,46 @@ public class FeatureSelector {
 
         dataReader = new DataReader("output.csv",
                                     "output2.csv");
-        totalFeatureCount = dataReader.getHeader().size() - IGNORE_FIRST_N_FEATURES; //Subtract two since we are ignoring the row ID and output class as they aren't features
-
     }
 
     public void run() {
 
-        //List<Chromosome> population = initialisePopulation();
         List<IChromosome> population = new ArrayList<IChromosome>();
         for (int i = 0; i < populationSize; i++)
-            population.add(new BitStringChromosome(totalFeatureCount - IGNORE_FIRST_N_FEATURES).init());
+            population.add(new BitStringChromosome(dataReader.getFeatureCount()).init());
 
-        while (generation < 50) {
+        while (true) {
             double bestAccuracy = -1;
 
             for (int i = 0; i < populationSize; i++)
                 population.get(i).setFitness(-1);
 
-            for (int i = 0; i < population.size(); i++) {
-
-                double accuracyTrain = 0;
-                double accuracyTest = 0;
-
-                if (CLASSIFICATION_METHOD == __SVM) {
-                    svm_model model = SVM.create(dataReader, population.get(i).getFeatureIndices());
-                    accuracyTrain = SVM.eval(model, population.get(i).getFeatureIndices(), dataReader.getTrainingRecords());
-                    accuracyTest = SVM.eval(model, population.get(i).getFeatureIndices(), dataReader.getTestRecords());
-                } else if (CLASSIFICATION_METHOD == __DECISION_TREE) {
-
-                }
-
-                if (accuracyTest > bestAccuracy)
-                    bestAccuracy = accuracyTest;
-
-                population.get(i).setFitness(accuracyTest);
+            //Evaluate in parallel
+            Thread[] evals = new Thread[NUM_THREADS];
+            for (int i = 0; i < NUM_THREADS; i++) {
+                int fromIndex = (int)(i * ((double)populationSize/NUM_THREADS));
+                int toIndex = (int)((i+1) * ((double)populationSize/NUM_THREADS));
+                evals[i] = new Thread(new ParallelEvaluator(dataReader, population.subList(fromIndex, toIndex)));
+                evals[i].start();
             }
 
+            for (int i = 0; i < NUM_THREADS; i++)
+                try {
+                    evals[i].join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             generation++;
-            System.out.println("Best accuracy of Generation " + generation + ": " + bestAccuracy);
 
 
             //Breed using proportional roulette wheel selection
             List<IChromosome> children = new ArrayList<IChromosome>();
             //Sort chromosomes according to fitness
             Collections.sort(population);
+
+            System.out.println("Best/Worst accuracy of Generation " + generation + ": " + population.get(0).getFitness() + "\t" + population.get(population.size() - 1).getFitness());
+
             while (children.size() < populationSize) {
                 IChromosome father, mother;
                 do {
@@ -94,8 +95,10 @@ public class FeatureSelector {
                     mother = ParentSelector.select(population, ParentSelector.ROULETTE_WHEEL);
                 } while (father == mother);
 
-                if (population.get(0) instanceof BitStringChromosome)
+                if (population.get(0) instanceof BitStringChromosome) {
                     children.add(BitStringChromosome.crossover((BitStringChromosome) father, (BitStringChromosome) mother));
+                    children.get(children.size() - 1).mutate();
+                }
                 else {
                     children.add(crossover((Chromosome) father, (Chromosome) mother));
                     ((BitStringChromosome)children.get(children.size()-1)).mutate();
@@ -107,6 +110,8 @@ public class FeatureSelector {
         }
 
     }
+
+
 
     public Chromosome crossover(Chromosome father, Chromosome mother) {
 
@@ -154,19 +159,6 @@ public class FeatureSelector {
 
 
 
-
-    public List<Chromosome> initialisePopulation() {
-
-        System.out.println("Total features: " + totalFeatureCount);
-
-
-        List<Chromosome> population = new ArrayList<Chromosome>();
-
-        for (int i = 0; i < populationSize; i++)
-            population.add(new Chromosome(getSubset(totalFeatureCount, totalFeatureCount / 5, false, IGNORE_FIRST_N_FEATURES)));
-
-        return population;
-    }
 
 
 
