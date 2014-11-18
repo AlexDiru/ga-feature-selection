@@ -43,5 +43,4 @@ public class ParentSelector {
 
         return parents.get((int)(Math.random() * (maxSize - minSize))+minSize);
     }
-
 }

@@ -82,7 +82,8 @@ public class FeatureSelector {
             //Sort chromosomes according to fitness
             Collections.sort(population);
 
-            System.out.println( generation + "," + population.get(population.size() - 1).getFitness());
+            IChromosome fittest = population.get(population.size() - 1);
+            System.out.println( generation + "," + fittest.getFitness() + "," + fittest);
 
             while (children.size() < populationSize) {
                 IChromosome father, mother;
@@ -97,7 +98,7 @@ public class FeatureSelector {
                 }
                 else {
                     children.add(crossover((Chromosome) father, (Chromosome) mother));
-                    ((BitStringChromosome)children.get(children.size()-1)).mutate();
+                    (children.get(children.size()-1)).mutate();
                 }
             }
 
@@ -112,29 +113,6 @@ public class FeatureSelector {
     public Chromosome crossover(Chromosome father, Chromosome mother) {
 
         List<Integer> genes = new ArrayList<Integer>();
-
-        /*int splitPointF = (int)(Math.random() * father.getFeatureIndices().size());
-        int splitPointM = (int)(Math.random() * mother.getFeatureIndices().size());
-
-        if (Math.random() < 0.5) {
-            for (int i = 0; i < splitPointF; i++)
-                if (!genes.contains(father.getFeatureIndices().get(i)))
-                    genes.add(father.getFeatureIndices().get(i));
-
-            for (int i = splitPointM; i < mother.getFeatureIndices().size(); i++)
-                if (!genes.contains(mother.getFeatureIndices().get(i)))
-                    genes.add(mother.getFeatureIndices().get(i));
-        } else {
-            for (int i = 0; i < splitPointM; i++)
-                if (!genes.contains(mother.getFeatureIndices().get(i)))
-                    genes.add(mother.getFeatureIndices().get(i));
-
-            for (int i = splitPointF; i < father.getFeatureIndices().size(); i++)
-                if (!genes.contains(father.getFeatureIndices().get(i)))
-                    genes.add(father.getFeatureIndices().get(i));
-
-        }
-        */
 
         while (genes.size() < father.getFeatureIndices().size()) {
             int index;

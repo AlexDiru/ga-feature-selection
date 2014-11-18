@@ -11,7 +11,7 @@ public class GeneticParameters {
     public static final int __DECISION_TREE = 1;
 
 
-    public static int classificationMethod = 1;
+    public static int classificationMethod = 0;
     public static int crossoverMethod = CROSSOVER_METHOD_N_POINT;
     public static int threadCount = 4;
 

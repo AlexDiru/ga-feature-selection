@@ -1,3 +1,6 @@
+import weka.core.Instance;
+import weka.core.Instances;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,21 +17,23 @@ public class TrainingRecord {
         return clazz;
     }
 
-    public TrainingRecord(String line) {
-        String[] cells = line.split(",");
-
-        if (cells[1].equals("\"HC\""))
-            clazz = 0;
-        else if (cells[1].equals("\"MCI\""))
-            clazz = 1;
-        else
-            clazz = 2;
-
+    //Assumes class index on far right
+    public TrainingRecord(Instance instance) {
         attributes = new ArrayList<Double>();
 
-        for (int i = 2; i < cells.length; i++) {
-            attributes.add(Double.parseDouble(cells[i]));
-        }
+        //Class value is included as a value to ignore it
+        for (int i = 0; i < instance.numValues() - 1; i++)
+            attributes.add(instance.value(i));
+
+        clazz = (int)instance.classValue();
     }
 
+    public static List<TrainingRecord> convert(Instances instances) {
+        List<TrainingRecord> records = new ArrayList<TrainingRecord>();
+
+        for (int i = 0; i < instances.numInstances(); i++)
+            records.add(new TrainingRecord(instances.instance(i)));
+
+        return records;
+    }
 }

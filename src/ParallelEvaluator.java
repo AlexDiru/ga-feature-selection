@@ -1,3 +1,4 @@
+import libsvm.svm_model;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.evaluation.NominalPrediction;
@@ -18,12 +19,23 @@ public class ParallelEvaluator implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < population.size(); i++) {
-            double accuracyTrain = 0;
             double accuracyTest = 0;
 
             if (GeneticParameters.classificationMethod == GeneticParameters.__SVM) {
-                //svm_model model = SVM.create(dataReader, population.get(i).getFeatureIndices());
-                //accuracyTrain = SVM.eval(model, population.get(i).getFeatureIndices(), dataReader.getTrainingRecords());
+
+                double accuracyTotal = 0;
+
+                for (int j = 0; j < dataReader.getTrainingInstances().length; j++) {
+                    Instances trInstances = population.get(i).getFeatureSubset(dataReader.getTrainingInstances()[j]);
+                    Instances teInstances = population.get(i).getFeatureSubset(dataReader.getTestInstances()[j]);
+
+                    svm_model model = SVM.create(trInstances);
+                    accuracyTotal += SVM.eval(model, teInstances);
+                }
+
+                accuracyTest = accuracyTotal/dataReader.getTrainingInstances().length;
+                accuracyTest *= 100;
+
             } else if (GeneticParameters.classificationMethod == GeneticParameters.__DECISION_TREE) {
                 Classifier model = new J48();
                 FastVector predictions = new FastVector();

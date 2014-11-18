@@ -1,10 +1,14 @@
 import libsvm.*;
+import weka.core.Instances;
 
 import java.util.List;
 
 public class SVM {
 
-    public static svm_model create(DataReader dataReader, List<Integer> featureIndices) {
+    public static svm_model create(Instances trainingInstances) {
+
+        List<TrainingRecord> trainingRecords = TrainingRecord.convert(trainingInstances);
+
 
         //Create an SVM and train it
 
@@ -30,26 +34,26 @@ public class SVM {
         param.weight = new double[0];
 
         svm_problem prob = new svm_problem();
-        prob.l = dataReader.getTrainingRecords().size(); //Length;
+        prob.l = trainingRecords.size(); //Length;
         prob.y = new double[prob.l];
         prob.x = new svm_node[prob.l][];
 
         //Assign all training records to the SVM
-        for (int i = 0; i < dataReader.getTrainingRecords().size(); i++) {
-            List<Double> atts = dataReader.getTrainingRecords().get(i).getAttributes();
-            prob.x[i] = new svm_node[featureIndices.size()];
+        for (int i = 0; i < trainingRecords.size(); i++) {
+            List<Double> atts = trainingRecords.get(i).getAttributes();
+            prob.x[i] = new svm_node[atts.size()];
 
             //Only include the selected features here
-            for (int j = 0; j < featureIndices.size(); j++) {
+            for (int j = 0; j < atts.size(); j++) {
                 svm_node node = new svm_node();
                 node.index = j;
-                node.value = atts.get(featureIndices.get(j));
+                node.value = atts.get(j);
                 //System.out.println(node.value);
                 prob.x[i][j] = node;
             }
 
 
-            prob.y[i] = dataReader.getTrainingRecords().get(i).getClazz();
+            prob.y[i] = trainingRecords.get(i).getClazz();
         }
 
         //System.out.println("Errors with SVM: " + svm.svm_check_parameter(prob,param));
@@ -65,20 +69,22 @@ public class SVM {
         return model;
     }
 
-    public static double eval(svm_model model, List<Integer> featureIndices, List<TrainingRecord> testRecords){
+    public static double eval(svm_model model, Instances testInstances){
+
+        List<TrainingRecord> testRecords = TrainingRecord.convert(testInstances);
 
         //Evaluate the SVM
         int correctPredictions = 0;
 
         for (int i = 0; i < testRecords.size(); i++) {
             List<Double> atts = testRecords.get(i).getAttributes();
-            svm_node[] nodes = new svm_node[featureIndices.size()];
+            svm_node[] nodes = new svm_node[atts.size()];
 
             //Only include the selected features here
-            for (int j = 0; j < featureIndices.size(); j++) {
+            for (int j = 0; j < atts.size(); j++) {
                 svm_node node = new svm_node();
                 node.index = j;
-                node.value = atts.get(featureIndices.get(j));
+                node.value = atts.get(j);
                 nodes[j] = node;
             }
 
