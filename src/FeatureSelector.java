@@ -21,13 +21,11 @@ public class FeatureSelector {
     private final int crossoverMethod;
     private final int fitnessFunctionMethod;
     private final TerminationCriteria terminationCriteria;
-    private final int populationSize;
     private DataReader dataReader;
     private int generation = 0;
 
     public FeatureSelector(int populationSize, TerminationCriteria terminationCriteria, int fitnessFunctionMethod, int crossoverMethod, int mutationMethod,
                            float mutationRate) {
-        this.populationSize = populationSize;
         this.terminationCriteria = terminationCriteria;
         this.fitnessFunctionMethod = fitnessFunctionMethod;
         this.crossoverMethod = crossoverMethod;
@@ -47,7 +45,7 @@ public class FeatureSelector {
     public void run() {
 
         List<IChromosome> population = new ArrayList<IChromosome>();
-        for (int i = 0; i < populationSize; i++)
+        for (int i = 0; i < GeneticParameters.populationSize; i++)
             population.add(new BitStringChromosome(dataReader.getFeatureCount()).init());
 
         System.out.println(GeneticParameters.toText());
@@ -55,14 +53,14 @@ public class FeatureSelector {
         while (true) {
             double bestAccuracy = -1;
 
-            for (int i = 0; i < populationSize; i++)
+            for (int i = 0; i < GeneticParameters.populationSize; i++)
                 population.get(i).setFitness(-1);
 
             //Evaluate in parallel
             Thread[] evals = new Thread[GeneticParameters.threadCount];
             for (int i = 0; i < evals.length; i++) {
-                int fromIndex = (int)(i * ((double)populationSize/evals.length));
-                int toIndex = (int)((i+1) * ((double)populationSize/evals.length));
+                int fromIndex = (int)(i * ((double)GeneticParameters.populationSize/evals.length));
+                int toIndex = (int)((i+1) * ((double)GeneticParameters.populationSize/evals.length));
                 evals[i] = new Thread(new ParallelEvaluator(dataReader, population.subList(fromIndex, toIndex)));
                 evals[i].start();
             }
@@ -85,7 +83,7 @@ public class FeatureSelector {
             IChromosome fittest = population.get(population.size() - 1);
             System.out.println( generation + "," + fittest.getFitness() + "," + fittest);
 
-            while (children.size() < populationSize) {
+            while (children.size() < GeneticParameters.populationSize) {
                 IChromosome father, mother;
                 do {
                     father = ParentSelector.select(population, ParentSelector.ROULETTE_WHEEL);

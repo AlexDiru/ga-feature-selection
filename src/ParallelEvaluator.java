@@ -3,6 +3,7 @@ import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.evaluation.NominalPrediction;
 import weka.classifiers.trees.J48;
+import weka.classifiers.trees.RandomForest;
 import weka.core.FastVector;
 import weka.core.Instances;
 
@@ -16,39 +17,55 @@ public class ParallelEvaluator implements Runnable {
     DataReader dataReader;
     List<IChromosome> population;
 
+    public double svm(IChromosome chromosome) {
+        double accuracyTotal = 0;
+        double accuracyTest = 0;
+
+        for (int j = 0; j < dataReader.getTrainingInstances().length; j++) {
+            Instances trInstances = chromosome.getFeatureSubset(dataReader.getTrainingInstances()[j]);
+            Instances teInstances = chromosome.getFeatureSubset(dataReader.getTestInstances()[j]);
+
+            svm_model model = SVM.create(trInstances);
+            accuracyTotal += SVM.eval(model, teInstances);
+        }
+
+        accuracyTest = accuracyTotal/dataReader.getTrainingInstances().length;
+        return accuracyTest * 100;
+    }
+
+    public double decisionTree(IChromosome chromosome) {
+        return wekaGeneric(new J48(), chromosome);
+    }
+
+    private double wekaGeneric(Classifier model, IChromosome chromosome) {
+        FastVector predictions = new FastVector();
+
+        for (int j = 0; j < dataReader.getTrainingInstances().length; j++) {
+            Instances trInstances = chromosome.getFeatureSubset(dataReader.getTrainingInstances()[j]);
+            Instances teInstances = chromosome.getFeatureSubset(dataReader.getTestInstances()[j]);
+
+            Evaluation validation = classify(model, trInstances, teInstances);
+            predictions.appendElements(validation.predictions());
+        }
+
+        return calculateAccuracy(predictions);
+    }
+
+    public double randomForest(IChromosome chromosome) {
+        return wekaGeneric(new RandomForest(), chromosome);
+    }
+
     @Override
     public void run() {
         for (int i = 0; i < population.size(); i++) {
             double accuracyTest = 0;
 
             if (GeneticParameters.classificationMethod == GeneticParameters.__SVM) {
-
-                double accuracyTotal = 0;
-
-                for (int j = 0; j < dataReader.getTrainingInstances().length; j++) {
-                    Instances trInstances = population.get(i).getFeatureSubset(dataReader.getTrainingInstances()[j]);
-                    Instances teInstances = population.get(i).getFeatureSubset(dataReader.getTestInstances()[j]);
-
-                    svm_model model = SVM.create(trInstances);
-                    accuracyTotal += SVM.eval(model, teInstances);
-                }
-
-                accuracyTest = accuracyTotal/dataReader.getTrainingInstances().length;
-                accuracyTest *= 100;
-
+                accuracyTest = svm(population.get(i));
             } else if (GeneticParameters.classificationMethod == GeneticParameters.__DECISION_TREE) {
-                Classifier model = new J48();
-                FastVector predictions = new FastVector();
-
-                for (int j = 0; j < dataReader.getTrainingInstances().length; j++) {
-                    Instances trInstances = population.get(i).getFeatureSubset(dataReader.getTrainingInstances()[j]);
-                    Instances teInstances = population.get(i).getFeatureSubset(dataReader.getTestInstances()[j]);
-
-                    Evaluation validation = classify(model, trInstances, teInstances);
-                    predictions.appendElements(validation.predictions());
-                }
-
-                accuracyTest = calculateAccuracy(predictions);
+                accuracyTest = decisionTree(population.get(i));
+            } else if (GeneticParameters.classificationMethod == GeneticParameters.__RANDOM_FOREST) {
+                accuracyTest = randomForest(population.get(i));
             }
 
             population.get(i).setFitness(accuracyTest);

@@ -12,11 +12,6 @@ public class ParentSelector {
     }
 
     private static IChromosome selectRouletteWheel(List<IChromosome> parents) {
-        //Top 20 = 30%
-        //Top 20 - 40 = 25%
-        //Top 40 - 60 = 20%
-        //Top 60 - 80 = 15%
-        //Top 80 - 100 = 10%
 
         double p = Math.random();
 
