@@ -8,9 +8,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        FeatureSelector fs = new FeatureSelector();
-        fs.run();
 
+        new FeatureSelector(500,50,0.6,GeneticParameters.DYNAMIC_MUTATION_METHOD_INVERSE_TOTAL_FEATURES,GeneticParameters.__DECISION_TREE).run();
+        System.out.println("***Finished***");
     }
 
 }

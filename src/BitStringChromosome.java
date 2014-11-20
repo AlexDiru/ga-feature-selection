@@ -34,6 +34,7 @@ public class BitStringChromosome implements Comparable<BitStringChromosome>{
 
     public BitStringChromosome(int bitCount) {
         bits = new boolean[bitCount];
+        fitness = -1;
     }
 
     //Set all bits to random

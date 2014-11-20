@@ -16,9 +16,9 @@ public class DataLogger {
     private static String logFileName;
 
     public static void init() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         Date date = new Date();
-        logFileName = "log/" + dateFormat.format(date) + ".log";
+        logFileName = "log/" + GeneticParameters.getAbbreviation() + "-" + dateFormat.format(date) + ".log";
     }
 
     public static void writeln(String text) {
@@ -34,7 +34,5 @@ public class DataLogger {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }

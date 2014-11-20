@@ -1,0 +1,8 @@
+===Genetic Algorithm Feature Selector===
+Classification Method: Random Forest
+Crossover Method: 1-point
+Validation Method: 10-fold Cross Validation
+Population Size: 50
+Crossover Rate: 0.6
+(Dynamic) Mutation Method: Back Schutz
+Number of Features: 335

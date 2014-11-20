@@ -87,4 +87,29 @@ public class GeneticParameters {
         else
             throw new NotImplementedException();
     }
+
+    public static String getAbbreviation() {
+        StringBuilder sb = new StringBuilder();
+
+        if (classificationMethod == GeneticParameters.__RANDOM_FOREST)
+            sb.append("rf-");
+        else if (classificationMethod == GeneticParameters.__DECISION_TREE)
+            sb.append("dt-");
+        else if (classificationMethod == GeneticParameters.__SVM)
+            sb.append("svm-");
+
+        sb.append(populationSize);
+        sb.append("-");
+
+        if (dynamicMutationMethod == DYNAMIC_MUTATION_METHOD_CONSTANT)
+            sb.append("c");
+        else if (dynamicMutationMethod == DYNAMIC_MUTATION_METHOD_INVERSE_TOTAL_FEATURES)
+            sb.append("itf");
+        else if (dynamicMutationMethod == DYNAMIC_MUTATION_METHOD_FOGARTY)
+            sb.append("f");
+        else if (dynamicMutationMethod == DYNAMIC_MUTATION_METHOD_BACKSCHUTZ)
+            sb.append("bs");
+
+        return sb.toString();
+    }
 }

@@ -52,12 +52,17 @@ public class ParallelEvaluator implements Runnable {
     }
 
     public double randomForest(BitStringChromosome chromosome) {
-        return wekaGeneric(new RandomForest(), chromosome);
+        RandomForest rf = new RandomForest();
+        rf.setNumTrees(10);
+        return wekaGeneric(rf, chromosome);
     }
 
     @Override
     public void run() {
         for (int i = 0; i < population.size(); i++) {
+            if (population.get(i).getFitness() >= 0)
+                continue;
+
             double accuracyTest = 0;
 
             if (GeneticParameters.classificationMethod == GeneticParameters.__SVM) {
