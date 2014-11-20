@@ -15,9 +15,9 @@ import java.util.List;
 public class ParallelEvaluator implements Runnable {
 
     DataReader dataReader;
-    List<IChromosome> population;
+    List<BitStringChromosome> population;
 
-    public double svm(IChromosome chromosome) {
+    public double svm(BitStringChromosome chromosome) {
         double accuracyTotal = 0;
         double accuracyTest = 0;
 
@@ -33,11 +33,11 @@ public class ParallelEvaluator implements Runnable {
         return accuracyTest * 100;
     }
 
-    public double decisionTree(IChromosome chromosome) {
+    public double decisionTree(BitStringChromosome chromosome) {
         return wekaGeneric(new J48(), chromosome);
     }
 
-    private double wekaGeneric(Classifier model, IChromosome chromosome) {
+    private double wekaGeneric(Classifier model, BitStringChromosome chromosome) {
         FastVector predictions = new FastVector();
 
         for (int j = 0; j < dataReader.getTrainingInstances().length; j++) {
@@ -51,7 +51,7 @@ public class ParallelEvaluator implements Runnable {
         return calculateAccuracy(predictions);
     }
 
-    public double randomForest(IChromosome chromosome) {
+    public double randomForest(BitStringChromosome chromosome) {
         return wekaGeneric(new RandomForest(), chromosome);
     }
 
@@ -100,7 +100,7 @@ public class ParallelEvaluator implements Runnable {
         return 100 * correct / predictions.size();
     }
 
-    public ParallelEvaluator(DataReader dataReader, List<IChromosome> chromosomes) {
+    public ParallelEvaluator(DataReader dataReader, List<BitStringChromosome> chromosomes) {
         this.dataReader = dataReader;
         population = chromosomes;
     }

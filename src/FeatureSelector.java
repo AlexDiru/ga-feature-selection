@@ -1,3 +1,5 @@
+
+import com.sun.corba.se.impl.ior.GenericIdentifiable;
 import libsvm.*;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
@@ -6,6 +8,8 @@ import weka.classifiers.trees.J48;
 import weka.core.FastVector;
 import weka.core.Instances;
 
+
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,43 +19,28 @@ import java.util.List;
 
 public class FeatureSelector {
 
+    private static final int TARGET_GENERATION = 500;
 
-    private final float mutationRate;
-    private final int mutationMethod;
-    private final int crossoverMethod;
-    private final int fitnessFunctionMethod;
-    private final TerminationCriteria terminationCriteria;
     private DataReader dataReader;
     private int generation = 0;
 
-    public FeatureSelector(int populationSize, TerminationCriteria terminationCriteria, int fitnessFunctionMethod, int crossoverMethod, int mutationMethod,
-                           float mutationRate) {
-        this.terminationCriteria = terminationCriteria;
-        this.fitnessFunctionMethod = fitnessFunctionMethod;
-        this.crossoverMethod = crossoverMethod;
-        this.mutationMethod = mutationMethod;
-        this.mutationRate = mutationRate;
-
-        //d1 "C:\\Users\\Alex\\Dropbox\\AlexSpedding-PhD\\data\\12May2014\\ADNI_v3.csv"
-        //d1 (z score) "C:\\Users\\Alex\\Desktop\\output.csv"
-
-        //d2 C:\Users\Alex\Dropbox\AlexSpedding-PhD\data\12May2014\ADNI_EL_v3.csv
-        //d2 (z score)
-
-        dataReader = new DataReader("output.csv",
-                                    "output2.csv");
+    public FeatureSelector() {
+        dataReader = new DataReader("knimeout.csv");
+        DataLogger.init(); //Create log file name
     }
 
     public void run() {
 
-        List<IChromosome> population = new ArrayList<IChromosome>();
+        List<BitStringChromosome> population = new ArrayList<BitStringChromosome>();
         for (int i = 0; i < GeneticParameters.populationSize; i++)
             population.add(new BitStringChromosome(dataReader.getFeatureCount()).init());
 
-        System.out.println(GeneticParameters.toText());
+        String params = GeneticParameters.toText();
+        System.out.println(params);
+        DataLogger.writeln(params);
 
-        while (true) {
-            double bestAccuracy = -1;
+
+        while (generation <= TARGET_GENERATION) {
 
             for (int i = 0; i < GeneticParameters.populationSize; i++)
                 population.get(i).setFitness(-1);
@@ -76,84 +65,39 @@ public class FeatureSelector {
 
 
             //Breed using proportional roulette wheel selection
-            List<IChromosome> children = new ArrayList<IChromosome>();
+            List<BitStringChromosome> children = new ArrayList<BitStringChromosome>();
             //Sort chromosomes according to fitness
             Collections.sort(population);
 
-            IChromosome fittest = population.get(population.size() - 1);
-            System.out.println( generation + "," + fittest.getFitness() + "," + fittest);
+            BitStringChromosome fittest = population.get(population.size() - 1);
+            System.out.println(generation + "," + fittest.getFitness() + "," + fittest);
+            DataLogger.writeln(generation + "," + fittest.getFitness() + "," + fittest);
 
-            while (children.size() < GeneticParameters.populationSize) {
-                IChromosome father, mother;
+            //How many children to generate
+            int childrenCount = 0;
+            for (int i = 0; i < GeneticParameters.populationSize; i++)
+                if (Math.random() < GeneticParameters.crossoverRate)
+                    childrenCount++;
+
+            while (children.size() < childrenCount) {
+                BitStringChromosome father, mother;
                 do {
                     father = ParentSelector.select(population, ParentSelector.ROULETTE_WHEEL);
                     mother = ParentSelector.select(population, ParentSelector.ROULETTE_WHEEL);
                 } while (father == mother);
 
-                if (population.get(0) instanceof BitStringChromosome) {
-                    children.add(BitStringChromosome.crossover((BitStringChromosome) father, (BitStringChromosome) mother));
-                    children.get(children.size() - 1).mutate();
-                }
-                else {
-                    children.add(crossover((Chromosome) father, (Chromosome) mother));
-                    (children.get(children.size()-1)).mutate();
-                }
+                children.add(BitStringChromosome.crossover(father, mother));
+                children.get(children.size() - 1).mutate(GeneticParameters.getMutationRate(TARGET_GENERATION, generation));
+            }
+
+            //Perform survivor selection (easier than survivor deletion since roulette wheel is already implemented) and merge children
+            while (children.size() < GeneticParameters.populationSize) {
+                BitStringChromosome keep = ParentSelector.select(population, ParentSelector.ROULETTE_WHEEL);
+                if (!children.contains(keep))
+                    children.add(keep);
             }
 
             population = children;
-
         }
-
     }
-
-
-
-    public Chromosome crossover(Chromosome father, Chromosome mother) {
-
-        List<Integer> genes = new ArrayList<Integer>();
-
-        while (genes.size() < father.getFeatureIndices().size()) {
-            int index;
-            if (Math.random() < 0.5)
-                index = father.getRandomFeatureIndex();
-            else
-                index = mother.getRandomFeatureIndex();
-
-            if (!genes.contains(index))
-                genes.add(index);
-        }
-
-        return new Chromosome(genes);
-
-
-    }
-
-
-
-
-
-
-
-    public static List<Integer> getSubset(int featureCount, int subsetSize, boolean duplicatesAllowed, int ignoreFirstNFeatures) {
-        List<Integer> subset = new ArrayList<Integer>();
-
-        for (int i = 0; i < subsetSize; i++) {
-            int feature = (int)(Math.random() * (featureCount - ignoreFirstNFeatures)) + ignoreFirstNFeatures;
-
-            if (duplicatesAllowed)
-                subset.add(feature);
-            else {
-                //Check it's not a duplicate
-                if (subset.contains(feature)) {
-                    i--;
-                    continue;
-                } else {
-                    subset.add(feature);
-                }
-            }
-        }
-
-        return subset;
-    }
-
 }

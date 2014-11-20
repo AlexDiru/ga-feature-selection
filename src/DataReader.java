@@ -23,7 +23,7 @@ public class DataReader {
     private Instances[] testInstances;
 
 
-    public DataReader(String trainingDataFile, String testDataFile) {
+    public DataReader(String dataFile) {
         try {
             //Sort out 'Instances' for Weka and k-fold cross validation
             Instances allInstances = (new ConverterUtils.DataSource("knimeout.csv")).getDataSet();
@@ -34,6 +34,8 @@ public class DataReader {
 
             trainingInstances = split[0];
             testInstances = split[1];
+
+            new GeneticParameters(getFeatureCount());
 
         } catch (Exception e) {
             e.printStackTrace();
