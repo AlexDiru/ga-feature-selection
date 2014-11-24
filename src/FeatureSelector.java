@@ -13,13 +13,14 @@ public class FeatureSelector {
 
     public FeatureSelector(int targetGeneration, int populationSize, double crossoverRate, int mutationRateMethod, int classificationMethod) {
         dataReader = new DataReader("knimeout.csv");
-        DataLogger.init(); //Create log file name
 
         GeneticParameters.populationSize = populationSize;
         GeneticParameters.crossoverRate = crossoverRate;
         GeneticParameters.dynamicMutationMethod = mutationRateMethod;
         GeneticParameters.classificationMethod = classificationMethod;
         this.targetGeneration = targetGeneration;
+
+        DataLogger.init();
     }
 
     public void run() {

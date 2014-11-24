@@ -53,7 +53,7 @@ public class ParallelEvaluator implements Runnable {
 
     public double randomForest(BitStringChromosome chromosome) {
         RandomForest rf = new RandomForest();
-        rf.setNumTrees(10);
+        rf.setNumTrees(50);
         return wekaGeneric(rf, chromosome);
     }
 
