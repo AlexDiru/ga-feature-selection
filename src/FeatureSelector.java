@@ -11,8 +11,8 @@ public class FeatureSelector {
     private DataReader dataReader;
     private int generation = 0;
 
-    public FeatureSelector(int targetGeneration, int populationSize, double crossoverRate, int mutationRateMethod, int classificationMethod) {
-        dataReader = new DataReader("knimeout.csv");
+    public FeatureSelector(DataReader dataReader, int targetGeneration, int populationSize, double crossoverRate, int mutationRateMethod, int classificationMethod) {
+        this.dataReader = dataReader;
 
         GeneticParameters.populationSize = populationSize;
         GeneticParameters.crossoverRate = crossoverRate;

@@ -1,4 +1,5 @@
 import libsvm.*;
+import weka.core.Instance;
 import weka.core.Instances;
 
 import java.util.List;
@@ -67,6 +68,24 @@ public class SVM {
         svm_model model = svm.svm_train(prob, param);
 
         return model;
+    }
+
+    public static double predict(svm_model model, Instance instance) {
+
+        TrainingRecord testRecord = new TrainingRecord(instance);
+
+        List<Double> atts = testRecord.getAttributes();
+        svm_node[] nodes = new svm_node[atts.size()];
+
+        //Only include the selected features here
+        for (int j = 0; j < atts.size(); j++) {
+            svm_node node = new svm_node();
+            node.index = j;
+            node.value = atts.get(j);
+            nodes[j] = node;
+        }
+
+        return svm.svm_predict(model,nodes);
     }
 
     public static double eval(svm_model model, Instances testInstances){

@@ -37,6 +37,14 @@ public class BitStringChromosome implements Comparable<BitStringChromosome>{
         fitness = -1;
     }
 
+    public BitStringChromosome(String features) {
+        bits = new boolean[features.length()];
+        fitness = -1;
+
+        for (int i = 0; i < features.length(); i++)
+            bits[i] = features.charAt(i) == '1';
+    }
+
     //Set all bits to random
     public BitStringChromosome init() {
         for (int i = 0; i < size(); i++)

@@ -21,12 +21,17 @@ public class DataReader {
 
     private Instances[] trainingInstances;
     private Instances[] testInstances;
+    private Instances allInstances;
+
+    public Instances getAllInstances() {
+        return allInstances;
+    }
 
 
     public DataReader(String dataFile) {
         try {
             //Sort out 'Instances' for Weka and k-fold cross validation
-            Instances allInstances = (new ConverterUtils.DataSource("knimeout.csv")).getDataSet();
+            allInstances = (new ConverterUtils.DataSource("knimeout.csv")).getDataSet();
             allInstances.setClassIndex(allInstances.numAttributes() - 1);
 
             //10-split CV
