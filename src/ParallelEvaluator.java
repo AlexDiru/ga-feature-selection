@@ -1,7 +1,11 @@
 import libsvm.svm_model;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.evaluation.NominalPrediction;
+import weka.classifiers.functions.Logistic;
+import weka.classifiers.functions.MultilayerPerceptron;
+import weka.classifiers.lazy.IBk;
 import weka.classifiers.trees.J48;
 import weka.classifiers.trees.RandomForest;
 import weka.core.FastVector;
@@ -51,6 +55,12 @@ public class ParallelEvaluator implements Runnable {
         return calculateAccuracy(predictions);
     }
 
+    public double logisticRegression(BitStringChromosome chromosome) { return wekaGeneric(new Logistic(), chromosome);}
+
+    public double mlp(BitStringChromosome chromosome) { return wekaGeneric(new MultilayerPerceptron(), chromosome); }
+
+    public double knn(BitStringChromosome chromosome) { return wekaGeneric(new IBk(), chromosome); }
+
     public double randomForest(BitStringChromosome chromosome) {
         RandomForest rf = new RandomForest();
         rf.setNumTrees(50);
@@ -71,7 +81,14 @@ public class ParallelEvaluator implements Runnable {
                 accuracyTest = decisionTree(population.get(i));
             } else if (GeneticParameters.classificationMethod == GeneticParameters.__RANDOM_FOREST) {
                 accuracyTest = randomForest(population.get(i));
-            }
+            } else if (GeneticParameters.classificationMethod == GeneticParameters.__LOGISTIC) {
+                accuracyTest = logisticRegression(population.get(i));
+            } else if (GeneticParameters.classificationMethod == GeneticParameters.__MLP) {
+                accuracyTest = mlp(population.get(i));
+            } else if (GeneticParameters.classificationMethod == GeneticParameters.__KNN)
+                accuracyTest = knn(population.get(i));
+            else
+                throw new NotImplementedException();
 
             population.get(i).setFitness(accuracyTest);
         }

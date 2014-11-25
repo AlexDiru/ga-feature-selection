@@ -12,6 +12,9 @@ public class GeneticParameters {
     public static final int __SVM = 0;
     public static final int __DECISION_TREE = 1;
     public static final int __RANDOM_FOREST = 2;
+    public static final int __LOGISTIC = 3;
+    public static final int __MLP = 4;
+    public static final int __KNN = 5;
 
     public static final int DYNAMIC_MUTATION_METHOD_CONSTANT = 0;
     public static final int DYNAMIC_MUTATION_METHOD_INVERSE_TOTAL_FEATURES = 1;
@@ -51,6 +54,12 @@ public class GeneticParameters {
             return "Decision Tree";
         else if (classificationMethod == __RANDOM_FOREST)
             return "Random Forest";
+        else if (classificationMethod == __LOGISTIC)
+            return "Logistic Regression";
+        else if (classificationMethod == __MLP)
+            return "MLP";
+        else if (classificationMethod == __KNN)
+            return "KNN";
         return "UNKNOWN";
     }
 
@@ -97,6 +106,12 @@ public class GeneticParameters {
             sb.append("dt-");
         else if (classificationMethod == GeneticParameters.__SVM)
             sb.append("svm-");
+        else if (classificationMethod == GeneticParameters.__LOGISTIC)
+            sb.append("lr-");
+        else if (classificationMethod == GeneticParameters.__MLP)
+            sb.append("mlp-");
+        else if (classificationMethod == GeneticParameters.__KNN)
+            sb.append("knn-");
 
         sb.append(populationSize);
         sb.append("-");
