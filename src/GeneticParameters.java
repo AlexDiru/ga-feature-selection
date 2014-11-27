@@ -12,7 +12,7 @@ public class GeneticParameters {
         HCxAD
     }
 
-    public static ClassesToUse classesToUse = ClassesToUse.ALL;
+    public static ClassesToUse classesToUse;
 
     public static final int CROSSOVER_METHOD_N_POINT = 0;
     public static final int CROSSOVER_METHOD_HALFWAY = 1;
