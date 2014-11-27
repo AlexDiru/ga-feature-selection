@@ -19,14 +19,26 @@ public class DataReader {
         return testInstances;
     }
 
+    //OVA Classifier
     private Instances[] trainingInstances;
     private Instances[] testInstances;
     private Instances allInstances;
 
+    //OVO Classifier
+    private Instances allMCIandAD;
+    private Instances allMCIandHC;
+    private Instances allHCandAD;
+
+    private Instances[] trainMCIandAD;
+    private Instances[] testMCIandAD;
+    private Instances[] trainMCIandHC;
+    private Instances[] testMCIandHC;
+    private Instances[] trainHCandAD;
+    private Instances[] testHCandAD;
+
     public Instances getAllInstances() {
         return allInstances;
     }
-
 
     public DataReader(String dataFile) {
         try {
@@ -34,11 +46,46 @@ public class DataReader {
             allInstances = (new ConverterUtils.DataSource("knimeout.csv")).getDataSet();
             allInstances.setClassIndex(allInstances.numAttributes() - 1);
 
-            //10-split CV
+            //***OVA***
             Instances[][] split = crossValidationSplit(allInstances, K_FOLDS);
-
             trainingInstances = split[0];
             testInstances = split[1];
+
+            //***OVO***
+            allMCIandAD = new Instances(allInstances);
+            allHCandAD = new Instances(allInstances);
+            allMCIandHC = new Instances(allInstances);
+            allMCIandAD.delete();
+            allHCandAD.delete();
+            allMCIandHC.delete();
+
+            //Split data by class
+            for (int i = 0; i < allInstances.numInstances();i++)
+                switch ((int)allInstances.instance(i).classValue()) {
+                    case 0: //HC
+                        allMCIandHC.add(allInstances.instance(i));
+                        allHCandAD.add(allInstances.instance(i));
+                        break;
+                    case 1: //MCI
+                        allMCIandHC.add(allInstances.instance(i));
+                        allMCIandAD.add(allInstances.instance(i));
+                        break;
+                    case 2: //AD
+                        allHCandAD.add(allInstances.instance(i));
+                        allMCIandAD.add(allInstances.instance(i));
+                        break;
+                }
+
+            //Cross validation split
+            Instances[][] splitMCIandHC = crossValidationSplit(allMCIandHC, K_FOLDS);
+            Instances[][] splitMCIandAD = crossValidationSplit(allMCIandAD, K_FOLDS);
+            Instances[][] splitHCandAD = crossValidationSplit(allHCandAD, K_FOLDS);
+            trainMCIandHC = splitMCIandHC[0];
+            testMCIandHC = splitMCIandHC[1];
+            trainMCIandAD = splitMCIandAD[0];
+            testMCIandAD = splitMCIandAD[1];
+            trainHCandAD = splitHCandAD[0];
+            testHCandAD = splitHCandAD[1];
 
             new GeneticParameters(getFeatureCount());
 

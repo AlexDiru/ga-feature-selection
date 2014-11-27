@@ -1,6 +1,7 @@
 import libsvm.svm;
 import libsvm.svm_parameter;
 import libsvm.svm_problem;
+import weka.classifiers.trees.RandomForest;
 
 public class Main {
 
@@ -11,5 +12,9 @@ public class Main {
         //System.out.println("***MLP Finished***");
 
         new CombinedClassifier(new DataReader("knimeout.csv"),new DataReader("knimeout.csv"));
+
+        //RandomForest rf = new RandomForest();
+        //System.out.println(rf.getMaxDepth());
+        //System.out.println(rf.getTechnicalInformation().toString());
     }
 }
