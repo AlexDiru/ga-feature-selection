@@ -1,4 +1,5 @@
 import org.apache.commons.io.FileUtils;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 
@@ -12,11 +13,34 @@ public class DataReader {
     public static final int K_FOLDS = 10;
 
     public Instances[] getTrainingInstances() {
-        return trainingInstances;
+        switch(GeneticParameters.classesToUse) {
+            case ALL:
+                return trainingInstances;
+            case MCIxAD:
+                return getTrainMCIandAD();
+            case MCIxHC:
+                return getTrainMCIandHC();
+            case HCxAD:
+                return getTrainHCandAD();
+        }
+
+        throw new NotImplementedException();
     }
 
     public Instances[] getTestInstances() {
-        return testInstances;
+
+        switch(GeneticParameters.classesToUse) {
+            case ALL:
+                return testInstances;
+            case MCIxAD:
+                return getTestMCIandAD();
+            case MCIxHC:
+                return getTestMCIandHC();
+            case HCxAD:
+                return getTestHCandAD();
+        }
+
+        throw new NotImplementedException();
     }
 
     //OVA Classifier
@@ -28,6 +52,30 @@ public class DataReader {
     private Instances allMCIandAD;
     private Instances allMCIandHC;
     private Instances allHCandAD;
+
+    public Instances[] getTrainMCIandAD() {
+        return trainMCIandAD;
+    }
+
+    public Instances[] getTestMCIandAD() {
+        return testMCIandAD;
+    }
+
+    public Instances[] getTrainMCIandHC() {
+        return trainMCIandHC;
+    }
+
+    public Instances[] getTestMCIandHC() {
+        return testMCIandHC;
+    }
+
+    public Instances[] getTrainHCandAD() {
+        return trainHCandAD;
+    }
+
+    public Instances[] getTestHCandAD() {
+        return testHCandAD;
+    }
 
     private Instances[] trainMCIandAD;
     private Instances[] testMCIandAD;

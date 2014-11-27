@@ -11,7 +11,7 @@ public class FeatureSelector {
     private DataReader dataReader;
     private int generation = 0;
 
-    public FeatureSelector(DataReader dataReader, int targetGeneration, int populationSize, double crossoverRate, int mutationRateMethod, int classificationMethod) {
+    public FeatureSelector(DataReader dataReader, int targetGeneration, int populationSize, double crossoverRate, int mutationRateMethod, int classificationMethod, GeneticParameters.ClassesToUse classesToUse) {
         this.dataReader = dataReader;
 
         GeneticParameters.populationSize = populationSize;
@@ -19,6 +19,8 @@ public class FeatureSelector {
         GeneticParameters.dynamicMutationMethod = mutationRateMethod;
         GeneticParameters.classificationMethod = classificationMethod;
         this.targetGeneration = targetGeneration;
+
+        GeneticParameters.classesToUse = classesToUse;
 
         DataLogger.init();
     }

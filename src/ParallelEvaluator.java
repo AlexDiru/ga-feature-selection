@@ -11,6 +11,8 @@ import weka.classifiers.trees.RandomForest;
 import weka.core.FastVector;
 import weka.core.Instances;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,47 +23,137 @@ public class ParallelEvaluator implements Runnable {
     DataReader dataReader;
     List<BitStringChromosome> population;
 
-    public double svm(BitStringChromosome chromosome) {
-        double accuracyTotal = 0;
-        double accuracyTest = 0;
+    //Returns a list with all the accuracies
+    //For OVA: just a list of one element
+    //For OVO: Average Accuracy, HCvsAD, MCIvsAD, MCIvsHC
+    public List<Double> svm(BitStringChromosome chromosome) {
+        if (GeneticParameters.USE_OVO) {
+            //ONE-VERSUS-ONE
+            double MCIvsADTotal = 0;
+            double MCIvsHCTotal = 0;
+            double HCvsADTotal = 0;
+            //MCI vs AD
+            for (int j = 0; j < dataReader.getTestHCandAD().length; j++) {
+                Instances[] trInstancesArr = new Instances[3];
+                Instances[] teInstancesArr = new Instances[3];
 
-        for (int j = 0; j < dataReader.getTrainingInstances().length; j++) {
-            Instances trInstances = chromosome.getFeatureSubset(dataReader.getTrainingInstances()[j]);
-            Instances teInstances = chromosome.getFeatureSubset(dataReader.getTestInstances()[j]);
+                trInstancesArr[0] = chromosome.getFeatureSubset(dataReader.getTrainHCandAD()[j]);
+                trInstancesArr[1] = chromosome.getFeatureSubset(dataReader.getTrainMCIandAD()[j]);
+                trInstancesArr[2] = chromosome.getFeatureSubset(dataReader.getTrainMCIandHC()[j]);
 
-            svm_model model = SVM.create(trInstances);
-            accuracyTotal += SVM.eval(model, teInstances);
+                teInstancesArr[0] = chromosome.getFeatureSubset(dataReader.getTestHCandAD()[j]);
+                teInstancesArr[1] = chromosome.getFeatureSubset(dataReader.getTestMCIandAD()[j]);
+                teInstancesArr[2] = chromosome.getFeatureSubset(dataReader.getTestMCIandHC()[j]);
+
+                svm_model[] models = new svm_model[3];
+                for (int i = 0; i < 3; i++)
+                    models[i] = SVM.create(trInstancesArr[i]);
+
+                HCvsADTotal += SVM.eval(models[0], teInstancesArr[0]);
+                MCIvsADTotal += SVM.eval(models[1], teInstancesArr[1]);
+                MCIvsHCTotal += SVM.eval(models[2], teInstancesArr[2]);
+            }
+
+            double totalAverage = (HCvsADTotal + MCIvsADTotal + MCIvsHCTotal) / (dataReader.getTestHCandAD().length * 3);
+
+            HCvsADTotal /= dataReader.getTestHCandAD().length;
+            MCIvsADTotal /= dataReader.getTestHCandAD().length;
+            MCIvsHCTotal /= dataReader.getTestHCandAD().length;
+
+            List<Double> aList = new ArrayList<Double>();
+            aList.add(HCvsADTotal);
+            aList.add(MCIvsADTotal);
+            aList.add(MCIvsHCTotal);
+            aList.add(totalAverage);
+            return aList;
+        } else {
+            //ONE-VERSUS-ALL
+            double accuracyTotal = 0;
+            for (int j = 0; j < dataReader.getTrainingInstances().length; j++) {
+                Instances trInstances = chromosome.getFeatureSubset(dataReader.getTrainingInstances()[j]);
+                Instances teInstances = chromosome.getFeatureSubset(dataReader.getTestInstances()[j]);
+
+                svm_model model = SVM.create(trInstances);
+                accuracyTotal += SVM.eval(model, teInstances);
+            }
+
+            accuracyTotal /= dataReader.getTrainingInstances().length;
+            List<Double> aList = new ArrayList<Double>();
+            aList.add(accuracyTotal * 100);
+            return aList;
         }
-
-        accuracyTest = accuracyTotal/dataReader.getTrainingInstances().length;
-        return accuracyTest * 100;
     }
 
-    public double decisionTree(BitStringChromosome chromosome) {
+    public List<Double> decisionTree(BitStringChromosome chromosome) {
         return wekaGeneric(new J48(), chromosome);
     }
 
-    private double wekaGeneric(Classifier model, BitStringChromosome chromosome) {
-        FastVector predictions = new FastVector();
+    private List<Double> wekaGeneric(Classifier model, BitStringChromosome chromosome) {
 
-        for (int j = 0; j < dataReader.getTrainingInstances().length; j++) {
-            Instances trInstances = chromosome.getFeatureSubset(dataReader.getTrainingInstances()[j]);
-            Instances teInstances = chromosome.getFeatureSubset(dataReader.getTestInstances()[j]);
+        if (!GeneticParameters.USE_OVO) {
+            FastVector predictions = new FastVector();
 
-            Evaluation validation = classify(model, trInstances, teInstances);
-            predictions.appendElements(validation.predictions());
+            for (int j = 0; j < dataReader.getTrainingInstances().length; j++) {
+                Instances trInstances = chromosome.getFeatureSubset(dataReader.getTrainingInstances()[j]);
+                Instances teInstances = chromosome.getFeatureSubset(dataReader.getTestInstances()[j]);
+
+                Evaluation validation = classify(model, trInstances, teInstances);
+                predictions.appendElements(validation.predictions());
+            }
+
+            List<Double> aList = new ArrayList<Double>();
+            aList.add(calculateAccuracy(predictions));
+            return aList;
+        } else {
+            //ONE-VERSUS-ONE
+            double MCIvsADAcc = 0;
+            double MCIvsHCAcc = 0;
+            double HCvsADAcc = 0;
+
+            FastVector[] predictions = new FastVector[3];
+            Arrays.fill(predictions, new FastVector());
+
+            for (int j = 0; j < dataReader.getTestHCandAD().length; j++) {
+                Instances[] trInstancesArr = new Instances[3];
+                Instances[] teInstancesArr = new Instances[3];
+
+                trInstancesArr[0] = chromosome.getFeatureSubset(dataReader.getTrainHCandAD()[j]);
+                trInstancesArr[1] = chromosome.getFeatureSubset(dataReader.getTrainMCIandAD()[j]);
+                trInstancesArr[2] = chromosome.getFeatureSubset(dataReader.getTrainMCIandHC()[j]);
+
+                teInstancesArr[0] = chromosome.getFeatureSubset(dataReader.getTestHCandAD()[j]);
+                teInstancesArr[1] = chromosome.getFeatureSubset(dataReader.getTestMCIandAD()[j]);
+                teInstancesArr[2] = chromosome.getFeatureSubset(dataReader.getTestMCIandHC()[j]);
+
+                Evaluation[] validations = new Evaluation[3];
+                for (int i = 0; i < 3; i++) {
+                    validations[i] = classify(model, trInstancesArr[i], teInstancesArr[i]);
+                    predictions[i].appendElements(validations[i].predictions());
+                }
+            }
+
+            HCvsADAcc = calculateAccuracy(predictions[0]);
+            MCIvsADAcc = calculateAccuracy(predictions[1]);
+            MCIvsHCAcc = calculateAccuracy(predictions[2]);
+
+            double totalAverage = (HCvsADAcc + MCIvsADAcc + MCIvsHCAcc) / (dataReader.getTestHCandAD().length*3);
+
+            List<Double> aList = new ArrayList<Double>();
+            aList.add(HCvsADAcc);
+            aList.add(MCIvsADAcc);
+            aList.add(MCIvsHCAcc);
+            aList.add(totalAverage);
+            return aList;
         }
-
-        return calculateAccuracy(predictions);
     }
 
-    public double logisticRegression(BitStringChromosome chromosome) { return wekaGeneric(new Logistic(), chromosome);}
+    public List<Double> logisticRegression(BitStringChromosome chromosome) { return wekaGeneric(new Logistic(), chromosome);}
 
-    public double mlp(BitStringChromosome chromosome) { return wekaGeneric(new MultilayerPerceptron(), chromosome); }
+    public List<Double> mlp(BitStringChromosome chromosome) { return wekaGeneric(new MultilayerPerceptron(), chromosome); }
 
-    public double knn(BitStringChromosome chromosome) { return wekaGeneric(new IBk(), chromosome); }
+    public List<Double> knn(BitStringChromosome chromosome) { return wekaGeneric(new IBk(), chromosome); }
 
-    public double randomForest(BitStringChromosome chromosome) {
+    public List<Double> randomForest(BitStringChromosome chromosome) {
         RandomForest rf = new RandomForest();
         rf.setNumTrees(50);
         return wekaGeneric(rf, chromosome);
@@ -76,17 +168,17 @@ public class ParallelEvaluator implements Runnable {
             double accuracyTest = 0;
 
             if (GeneticParameters.classificationMethod == GeneticParameters.__SVM) {
-                accuracyTest = svm(population.get(i));
+                accuracyTest = svm(population.get(i)).get(0);
             } else if (GeneticParameters.classificationMethod == GeneticParameters.__DECISION_TREE) {
-                accuracyTest = decisionTree(population.get(i));
+                accuracyTest = decisionTree(population.get(i)).get(0);
             } else if (GeneticParameters.classificationMethod == GeneticParameters.__RANDOM_FOREST) {
-                accuracyTest = randomForest(population.get(i));
+                accuracyTest = randomForest(population.get(i)).get(0);
             } else if (GeneticParameters.classificationMethod == GeneticParameters.__LOGISTIC) {
-                accuracyTest = logisticRegression(population.get(i));
+                accuracyTest = logisticRegression(population.get(i)).get(0);
             } else if (GeneticParameters.classificationMethod == GeneticParameters.__MLP) {
-                accuracyTest = mlp(population.get(i));
+                accuracyTest = mlp(population.get(i)).get(0);
             } else if (GeneticParameters.classificationMethod == GeneticParameters.__KNN)
-                accuracyTest = knn(population.get(i));
+                accuracyTest = knn(population.get(i)).get(0);
             else
                 throw new NotImplementedException();
 

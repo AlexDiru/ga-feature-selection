@@ -5,9 +5,19 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class GeneticParameters {
 
+    public enum ClassesToUse {
+        ALL,
+        MCIxAD,
+        MCIxHC,
+        HCxAD
+    }
+
+    public static ClassesToUse classesToUse = ClassesToUse.ALL;
+
     public static final int CROSSOVER_METHOD_N_POINT = 0;
     public static final int CROSSOVER_METHOD_HALFWAY = 1;
 
+    public static final boolean USE_OVO = false;
 
     public static final int __SVM = 0;
     public static final int __DECISION_TREE = 1;
