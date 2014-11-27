@@ -17,8 +17,6 @@ public class GeneticParameters {
     public static final int CROSSOVER_METHOD_N_POINT = 0;
     public static final int CROSSOVER_METHOD_HALFWAY = 1;
 
-    public static final boolean USE_OVO = false;
-
     public static final int __SVM = 0;
     public static final int __DECISION_TREE = 1;
     public static final int __RANDOM_FOREST = 2;
@@ -52,7 +50,8 @@ public class GeneticParameters {
         sb.append("Population Size: ").append(populationSize).append("\n");
         sb.append("Crossover Rate: ").append(crossoverRate).append("\n");
         sb.append("(Dynamic) Mutation Method: ").append(getDynamicMutationMethodAsString()).append("\n");
-        sb.append("Number of Features: ").append(numberOfFeatures);
+        sb.append("Number of Features: ").append(numberOfFeatures).append("\n");
+        sb.append("OVA or OVO?: ").append(classesToUse.toString());
         return sb.toString();
     }
 
