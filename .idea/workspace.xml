@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ece1f19c-e7fe-4da5-b848-6a7eb4a9b579" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GeneticParameters.java" afterPath="$PROJECT_DIR$/src/GeneticParameters.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ParallelEvaluator.java" afterPath="$PROJECT_DIR$/src/ParallelEvaluator.java" />
     </list>
     <ignored path="ga-feature-selection.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -130,8 +129,8 @@
       <file leaf-file-name="GeneticParameters.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GeneticParameters.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5595855" vertical-offset="576" max-vertical-offset="2574">
-              <caret line="52" column="80" selection-start-line="52" selection-start-column="80" selection-end-line="52" selection-end-column="80" />
+            <state vertical-scroll-proportion="0.1865285" vertical-offset="1980" max-vertical-offset="2610">
+              <caret line="118" column="29" selection-start-line="118" selection-start-column="29" selection-end-line="118" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -636,7 +635,7 @@
       <workItem from="1416384603351" duration="30557000" />
       <workItem from="1416526386353" duration="3445000" />
       <workItem from="1416617004351" duration="36094000" />
-      <workItem from="1417084313991" duration="6567000" />
+      <workItem from="1417084313991" duration="6630000" />
     </task>
     <task id="LOCAL-00001" summary="Intellij test">
       <created>1416177558209</created>
@@ -648,7 +647,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123855000" />
+    <option name="totallyTimeSpent" value="123918000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1922" height="1054" extended-state="6" />
@@ -1180,8 +1179,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GeneticParameters.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5595855" vertical-offset="576" max-vertical-offset="2574">
-          <caret line="52" column="80" selection-start-line="52" selection-start-column="80" selection-end-line="52" selection-end-column="80" />
+        <state vertical-scroll-proportion="0.1865285" vertical-offset="1980" max-vertical-offset="2610">
+          <caret line="118" column="29" selection-start-line="118" selection-start-column="29" selection-end-line="118" selection-end-column="29" />
           <folding />
         </state>
       </provider>

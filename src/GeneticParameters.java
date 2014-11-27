@@ -122,6 +122,8 @@ public class GeneticParameters {
         else if (classificationMethod == GeneticParameters.__KNN)
             sb.append("knn-");
 
+        sb.append(classesToUse.toString().toLowerCase()).append("-");
+
         sb.append(populationSize);
         sb.append("-");
 
