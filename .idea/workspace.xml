@@ -2,7 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ece1f19c-e7fe-4da5-b848-6a7eb4a9b579" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GeneticParameters.java" afterPath="$PROJECT_DIR$/src/GeneticParameters.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/OVO3WayClassifier.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/OVO3WayDecisionTree.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/OVO3WayWekaClassifier.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Vote.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-20-09-33-11.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-20-09-43-29.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-20-11-32-54.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-20-11-34-31.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-20-11-42-01.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-20-11-49-55.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-20-12-46-35.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-20-12-53-38.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-20-23-35-10.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-22-00-44-27.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-22-11-28-28.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c-2014-11-22-11-29-05.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/dt-50-c20141120093239.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/knn-50-itf-2014-11-25-09-34-26.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/knn-50-itf-2014-11-27-18-03-39.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/knn-50-itf-2014-11-27-18-05-01.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/knn-50-itf-2014-11-27-19-03-58.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/knn-50-itf-2014-11-27-19-04-34.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/knn-50-itf-2014-11-27-19-10-35.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/knn-50-itf-2014-11-27-19-11-17.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/lr-50-itf-2014-11-24-11-16-49.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/lr-50-itf-2014-11-24-20-01-28.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/mlp-50-itf-2014-11-25-08-57-39.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/svm-50-itf-2014-11-23-18-16-48.log" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GA-FeatureSelection/CombinedClassifier.class" afterPath="$PROJECT_DIR$/out/production/GA-FeatureSelection/CombinedClassifier.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GA-FeatureSelection/DataReader.class" afterPath="$PROJECT_DIR$/out/production/GA-FeatureSelection/DataReader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GA-FeatureSelection/FeatureSelector.class" afterPath="$PROJECT_DIR$/out/production/GA-FeatureSelection/FeatureSelector.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GA-FeatureSelection/GeneticParameters.class" afterPath="$PROJECT_DIR$/out/production/GA-FeatureSelection/GeneticParameters.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GA-FeatureSelection/Main.class" afterPath="$PROJECT_DIR$/out/production/GA-FeatureSelection/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GA-FeatureSelection/SVM$1.class" afterPath="$PROJECT_DIR$/out/production/GA-FeatureSelection/SVM$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GA-FeatureSelection/SVM.class" afterPath="$PROJECT_DIR$/out/production/GA-FeatureSelection/SVM.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BitStringChromosome.java" afterPath="$PROJECT_DIR$/src/BitStringChromosome.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CombinedClassifier.java" afterPath="$PROJECT_DIR$/src/CombinedClassifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DataReader.java" afterPath="$PROJECT_DIR$/src/DataReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FeatureSelector.java" afterPath="$PROJECT_DIR$/src/FeatureSelector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ParallelEvaluator.java" afterPath="$PROJECT_DIR$/src/ParallelEvaluator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SVM.java" afterPath="$PROJECT_DIR$/src/SVM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ga-feature-selection.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,18 +72,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="414">
-              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVM.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SVM.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="2178">
-              <caret line="72" column="24" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
+              <caret line="12" column="52" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -50,8 +82,8 @@
       <file leaf-file-name="CombinedClassifier.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CombinedClassifier.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1540" max-vertical-offset="2286">
-              <caret line="104" column="5" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2925" max-vertical-offset="3546">
+              <caret line="183" column="13" selection-start-line="183" selection-start-column="13" selection-end-line="183" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,59 +91,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FeatureSelector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FeatureSelector.java">
+      <file leaf-file-name="SVM.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/SVM.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1890">
-              <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BitStringChromosomeTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BitStringChromosomeTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1386">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.14492753" vertical-offset="1152" max-vertical-offset="3042">
+              <caret line="77" column="10" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BitStringChromosome.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BitStringChromosome.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="141" max-vertical-offset="2358">
-              <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataReader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DataReader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.5" vertical-offset="90" max-vertical-offset="2754">
-              <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
-              <folding>
-                <element signature="e#1505#1506#0" expanded="true" />
-                <element signature="e#1541#1542#0" expanded="true" />
-                <element signature="e#1585#1586#0" expanded="true" />
-                <element signature="e#1620#1621#0" expanded="true" />
-                <element signature="e#1665#1666#0" expanded="true" />
-                <element signature="e#1701#1702#0" expanded="true" />
-                <element signature="e#1745#1746#0" expanded="true" />
-                <element signature="e#1780#1781#0" expanded="true" />
-                <element signature="e#1824#1825#0" expanded="true" />
-                <element signature="e#1859#1860#0" expanded="true" />
-                <element signature="e#1902#1903#0" expanded="true" />
-                <element signature="e#1936#1937#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -126,11 +111,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GeneticParameters.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/GeneticParameters.java">
+      <file leaf-file-name="FeatureSelector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FeatureSelector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43523315" vertical-offset="0" max-vertical-offset="2610">
-              <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1926">
+              <caret line="35" column="90" selection-start-line="35" selection-start-column="90" selection-end-line="35" selection-end-column="90" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OVO3WayWekaClassifier.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/OVO3WayWekaClassifier.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1278">
+              <caret line="29" column="103" selection-start-line="29" selection-start-column="103" selection-end-line="29" selection-end-column="103" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BitStringChromosome.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BitStringChromosome.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="491" max-vertical-offset="2376">
+              <caret line="56" column="42" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -139,13 +144,35 @@
       <file leaf-file-name="ParallelEvaluator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ParallelEvaluator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2466">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="239" max-vertical-offset="2466">
+              <caret line="37" column="83" selection-start-line="37" selection-start-column="83" selection-end-line="37" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1403#1404#0" expanded="true" />
-                <element signature="e#1460#1461#0" expanded="true" />
+                <element signature="e#1457#1458#0" expanded="true" />
+                <element signature="e#1514#1515#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OVO3WayClassifier.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/OVO3WayClassifier.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
+              <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TerminationCriteria.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TerminationCriteria.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -171,14 +198,18 @@
         <option value="$PROJECT_DIR$/src/IChromosome.java" />
         <option value="$PROJECT_DIR$/src/ParentSelector.java" />
         <option value="$PROJECT_DIR$/src/DataLogger.java" />
-        <option value="$PROJECT_DIR$/src/BitStringChromosome.java" />
-        <option value="$PROJECT_DIR$/src/SVM.java" />
-        <option value="$PROJECT_DIR$/src/CombinedClassifier.java" />
-        <option value="$PROJECT_DIR$/src/FeatureSelector.java" />
-        <option value="$PROJECT_DIR$/src/DataReader.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/ParallelEvaluator.java" />
         <option value="$PROJECT_DIR$/src/GeneticParameters.java" />
+        <option value="$PROJECT_DIR$/src/Vote.java" />
+        <option value="$PROJECT_DIR$/src/OVO3WayDecisionTree.java" />
+        <option value="$PROJECT_DIR$/src/OVO3WayClassifier.java" />
+        <option value="$PROJECT_DIR$/src/OVO3WayWekaClassifier.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/DataReader.java" />
+        <option value="$PROJECT_DIR$/src/ParallelEvaluator.java" />
+        <option value="$PROJECT_DIR$/src/CombinedClassifier.java" />
+        <option value="$PROJECT_DIR$/src/BitStringChromosome.java" />
+        <option value="$PROJECT_DIR$/src/FeatureSelector.java" />
+        <option value="$PROJECT_DIR$/src/SVM.java" />
       </list>
     </option>
   </component>
@@ -216,9 +247,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -247,39 +275,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="weka" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ga-feature-selection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ga-feature-selection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ga-feature-selection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ga-feature-selection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane />
       </pane>
       <pane id="Scope">
         <subPane subId="Production" />
@@ -635,7 +638,11 @@
       <workItem from="1416384603351" duration="30557000" />
       <workItem from="1416526386353" duration="3445000" />
       <workItem from="1416617004351" duration="36094000" />
-      <workItem from="1417084313991" duration="6665000" />
+      <workItem from="1417084313991" duration="11824000" />
+      <workItem from="1417131165605" duration="20872000" />
+      <workItem from="1417285515043" duration="65000" />
+      <workItem from="1417291803840" duration="7550000" />
+      <workItem from="1418210530685" duration="12075000" />
     </task>
     <task id="LOCAL-00001" summary="Intellij test">
       <created>1416177558209</created>
@@ -647,7 +654,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123953000" />
+    <option name="totallyTimeSpent" value="169674000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1922" height="1054" extended-state="6" />
@@ -660,11 +667,11 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35699153" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29872882" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35699153" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29872882" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -711,66 +718,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SVM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="1908">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GeneticParameters.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="2178">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataLogger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="177" max-vertical-offset="792">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ParentSelector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="828">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FeatureSelector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="1836">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DynamicMutation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="504">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DataReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="936">
@@ -778,16 +725,6 @@
           <folding>
             <element signature="e#1505#1506#0" expanded="true" />
             <element signature="e#1541#1542#0" expanded="true" />
-            <element signature="e#1585#1586#0" expanded="true" />
-            <element signature="e#1620#1621#0" expanded="true" />
-            <element signature="e#1665#1666#0" expanded="true" />
-            <element signature="e#1701#1702#0" expanded="true" />
-            <element signature="e#1745#1746#0" expanded="true" />
-            <element signature="e#1780#1781#0" expanded="true" />
-            <element signature="e#1824#1825#0" expanded="true" />
-            <element signature="e#1859#1860#0" expanded="true" />
-            <element signature="e#1902#1903#0" expanded="true" />
-            <element signature="e#1936#1937#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -798,8 +735,6 @@
           <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1403#1404#0" expanded="true" />
-            <element signature="e#1460#1461#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -809,7 +744,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1296" max-vertical-offset="2448">
           <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -871,9 +806,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1152" max-vertical-offset="2772">
           <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -883,8 +816,6 @@
           <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1403#1404#0" expanded="true" />
-            <element signature="e#1460#1461#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -894,7 +825,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="2736">
           <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -913,16 +844,6 @@
           <folding>
             <element signature="e#1505#1506#0" expanded="true" />
             <element signature="e#1541#1542#0" expanded="true" />
-            <element signature="e#1585#1586#0" expanded="true" />
-            <element signature="e#1620#1621#0" expanded="true" />
-            <element signature="e#1665#1666#0" expanded="true" />
-            <element signature="e#1701#1702#0" expanded="true" />
-            <element signature="e#1745#1746#0" expanded="true" />
-            <element signature="e#1780#1781#0" expanded="true" />
-            <element signature="e#1824#1825#0" expanded="true" />
-            <element signature="e#1859#1860#0" expanded="true" />
-            <element signature="e#1902#1903#0" expanded="true" />
-            <element signature="e#1936#1937#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -963,9 +884,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3276">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -975,8 +894,6 @@
           <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1403#1404#0" expanded="true" />
-            <element signature="e#1460#1461#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1016,13 +933,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/weka.jar!/weka/core/Instances.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.2" vertical-offset="7038" max-vertical-offset="21672">
-          <caret line="453" column="0" selection-start-line="453" selection-start-column="0" selection-end-line="453" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/weka.jar!/weka/core/Instance.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5288" max-vertical-offset="9198">
@@ -1037,6 +947,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/TrainingRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="123" max-vertical-offset="702">
+          <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BitStringChromosomeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1386">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DynamicMutation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="504">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/weka.jar!/weka/classifiers/Evaluation.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="13942" max-vertical-offset="39924">
+          <caret line="834" column="18" selection-start-line="834" selection-start-column="18" selection-end-line="834" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ParentSelector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
@@ -1045,76 +983,110 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cadtrain.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Vote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="645" max-vertical-offset="1224">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/weka.jar!/weka/core/Instances.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.52" vertical-offset="21051" max-vertical-offset="21672">
+          <caret line="1272" column="0" selection-start-line="1272" selection-start-column="0" selection-end-line="1272" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/libsvm.jar!/libsvm/svm.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.92" vertical-offset="19944" max-vertical-offset="27666">
+          <caret line="1151" column="25" selection-start-line="1151" selection-start-column="25" selection-end-line="1151" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GeneticParameters.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="338" max-vertical-offset="2610">
+          <caret line="51" column="19" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/DataLogger.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="177" max-vertical-offset="792">
           <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DynamicMutation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="504">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/weka.jar!/weka/classifiers/Evaluation.class">
+    <entry file="file://$PROJECT_DIR$/src/OVO3WayDecisionTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="26200" max-vertical-offset="39924">
-          <caret line="1543" column="0" selection-start-line="1543" selection-start-column="0" selection-end-line="1543" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+          <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TrainingRecord.java">
+    <entry file="file://$PROJECT_DIR$/src/DataReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="123" max-vertical-offset="702">
-          <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="846" max-vertical-offset="2754">
+          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
           <folding>
-            <element signature="e#268#269#0" expanded="true" />
-            <element signature="e#301#302#0" expanded="true" />
+            <element signature="e#1505#1506#0" expanded="true" />
+            <element signature="e#1541#1542#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SVM.java">
+    <entry file="file://$PROJECT_DIR$/src/TerminationCriteria.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="2178">
-          <caret line="72" column="24" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CombinedClassifier.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1540" max-vertical-offset="2286">
-          <caret line="104" column="5" selection-start-line="104" selection-start-column="5" selection-end-line="104" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2925" max-vertical-offset="3546">
+          <caret line="183" column="13" selection-start-line="183" selection-start-column="13" selection-end-line="183" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BitStringChromosomeTest.java">
+    <entry file="file://$PROJECT_DIR$/src/ParallelEvaluator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1386">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="239" max-vertical-offset="2466">
+          <caret line="37" column="83" selection-start-line="37" selection-start-column="83" selection-end-line="37" selection-end-column="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1457#1458#0" expanded="true" />
+            <element signature="e#1514#1515#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OVO3WayWekaClassifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="1332">
+          <caret line="29" column="103" selection-start-line="29" selection-start-column="103" selection-end-line="29" selection-end-column="103" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BitStringChromosome.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="141" max-vertical-offset="2358">
-          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1126,61 +1098,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataReader.java">
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.5" vertical-offset="90" max-vertical-offset="2754">
-          <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
+          <caret line="12" column="52" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OVO3WayClassifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           <folding>
-            <element signature="e#1505#1506#0" expanded="true" />
-            <element signature="e#1541#1542#0" expanded="true" />
-            <element signature="e#1585#1586#0" expanded="true" />
-            <element signature="e#1620#1621#0" expanded="true" />
-            <element signature="e#1665#1666#0" expanded="true" />
-            <element signature="e#1701#1702#0" expanded="true" />
-            <element signature="e#1745#1746#0" expanded="true" />
-            <element signature="e#1780#1781#0" expanded="true" />
-            <element signature="e#1824#1825#0" expanded="true" />
-            <element signature="e#1859#1860#0" expanded="true" />
-            <element signature="e#1902#1903#0" expanded="true" />
-            <element signature="e#1936#1937#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BitStringChromosome.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="491" max-vertical-offset="2376">
+          <caret line="56" column="42" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FeatureSelector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1890">
-          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="414">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1926">
+          <caret line="35" column="90" selection-start-line="35" selection-start-column="90" selection-end-line="35" selection-end-column="90" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ParallelEvaluator.java">
+    <entry file="file://$PROJECT_DIR$/src/SVM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2466">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1403#1404#0" expanded="true" />
-            <element signature="e#1460#1461#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GeneticParameters.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43523315" vertical-offset="0" max-vertical-offset="2610">
-          <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.14492753" vertical-offset="1152" max-vertical-offset="3042">
+          <caret line="77" column="10" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
           <folding />
         </state>
       </provider>

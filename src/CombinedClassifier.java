@@ -1,12 +1,9 @@
 import libsvm.svm_model;
 import weka.classifiers.Classifier;
-import weka.classifiers.Evaluation;
 import weka.classifiers.functions.Logistic;
 import weka.classifiers.lazy.IBk;
 import weka.classifiers.trees.J48;
 import weka.classifiers.trees.RandomForest;
-import weka.core.FastVector;
-import weka.core.Instance;
 import weka.core.Instances;
 
 import java.util.Arrays;
@@ -27,8 +24,46 @@ public class CombinedClassifier {
     private String logisticRegressionFeatures = "10111000010100010111010000000010011100010000001010100010001000000100100000001110000000100011101101001111001101011110010000100110000111001111011011111001011000010100111111110100101111011111101010010101101000100010011010001101111001110110100011101010011101001101011101010011011111001101101100100011000111110011000010101000011010010010010";
     private String kNNFeatures = "00000010100010111101010110001000011110001000101000101110110011101110100011001001100100010100001101010101011100110111011110010101111011011100100111010000101001010111001010001111101010011110011110000000100001001001100100000111100110100101100011111001010110001000100001000000011000000100100110111100000111001010111110101000110100010010011";
 
+    private String allFeatures = "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111";
+
     private DataReader dataReader;
 
+    public CombinedClassifier(DataReader trainReader, DataReader testReader) {
+        int numClassifiers = 1;
+
+        OVO3WayClassifier dt = new OVO3WayDecisionTree(trainReader,testReader.getAllInstances());
+        dt.learn(trainReader.getAllMCIandAD(), trainReader.getAllMCIandHC(), trainReader.getAllHCandAD());
+
+        int correctClassifications = 0;
+
+        Vote vote = new Vote(numClassifiers, 3);
+
+        Instances[] decisionTreeInstances = dt.convertInstances(testReader.getAllInstances());
+
+        for (int testRecord = 0; testRecord < testReader.getAllInstances().numInstances(); testRecord++) {
+            int[][] predictions = new int[numClassifiers][];
+            Arrays.fill(predictions, new int[3]);
+            for (int i = 0; i < numClassifiers; i++) {
+                predictions[i][0] = dt.predictMCIorAD(decisionTreeInstances[0].instance(testRecord));
+                predictions[i][1] = dt.predictMCIorHC(decisionTreeInstances[1].instance(testRecord));
+                predictions[i][2] = dt.predictHCorAD(decisionTreeInstances[2].instance(testRecord));
+            }
+
+            int predVal = vote.predict(predictions);
+            int classVal = (int)testReader.getAllInstances().instance(testRecord).classValue();
+
+            System.out.println(predictions[0][0] + " | " + predictions[0][1] + " | " + predictions[0][2]);
+            System.out.println("Predicting " + classVal + " as " + predVal);
+
+            if (predVal == classVal)
+                correctClassifications++;
+        }
+
+        System.out.println("Acc: " + ((double)correctClassifications/testReader.getAllInstances().numInstances())*100);
+
+
+    }
+/*
     public CombinedClassifier(DataReader dataReader, DataReader testDataReader) throws Exception {
         int numberOfClassifiers = 5;
 
@@ -67,12 +102,16 @@ public class CombinedClassifier {
         int[] correctPredictions = new int[numberOfClassifiers];
         Arrays.fill(correctPredictions,0);
 
+        int combinedPredictions = 0;
+
+
         for (int i = 0; i < testDataReader.getAllInstances().numInstances(); i++) {
-            System.out.println("Predicting Instance " + i);
+            System.out.println("Predicting Instance " + i + " Actual is: " + (int)testDataReader.getAllInstances().instance(i).classValue());
 
             int actualClass = (int)dataReader.getAllInstances().instance(i).classValue();
 
             int[] classOut = new int[numberOfClassifiers];
+            int combinedOut;
 
             classOut[0] = (int)evaluation.evaluateModelOnce(decisionTree, decisionTreeTestInstances.instance(i));
             classOut[1] = (int)evaluation.evaluateModelOnce(randomForest, randomForestTestInstances.instance(i));
@@ -80,36 +119,67 @@ public class CombinedClassifier {
             classOut[3] = (int)evaluation.evaluateModelOnce(kNN, kNNTestInstances.instance(i));
             classOut[4] = (int)SVM.predict(svm, svmTestInstances.instance(i));
 
+            //Combined
+            int weightHC = 0;
+            int weightMCI = 0;
+            int weightAD = 0;
+
+            for (int c = 0; c < numberOfClassifiers; c++)
+            {
+                if (c == 1 || c == 2)
+                    continue;
+
+                if (classOut[c] == 0)
+                    weightHC++;
+                if (classOut[c] == 1)
+                    weightMCI++;
+                if (classOut[c] == 2)
+                    weightAD++;
+            }
+
+            if (weightHC > weightAD && weightHC > weightMCI)
+                combinedOut = 0;
+            else if (weightMCI > weightAD && weightMCI > weightHC)
+                combinedOut = 1;
+            else if (weightAD > weightHC && weightAD > weightMCI)
+                combinedOut = 2;
+            else
+                combinedOut = classOut[4];
+
             /*System.out.println("DTr: " + (int)decisionTreeOut);
             System.out.println("RnF: " + (int)randomForestOut);
             System.out.println("Log: " + (int)logisticOut);
             System.out.println("kNN: " + (int)kNNOut);
-            System.out.println("SVM: " + (int)svmOut);*/
+            System.out.println("SVM: " + (int)svmOut);
 
             for (int j = 0; j < numberOfClassifiers; j++)
                 if (classOut[j] == actualClass)
                     correctPredictions[j]++;
 
+            if (combinedOut == actualClass)
+                combinedPredictions++;
+
         }
 
         double[] accuracies = new double[numberOfClassifiers];
         for (int j = 0; j < numberOfClassifiers; j++)
-            accuracies[j] = 100d * ((double)correctPredictions[j] / dataReader.getAllInstances().numInstances());
+            accuracies[j] = 100d * ((double)correctPredictions[j] / testDataReader.getAllInstances().numInstances());
 
         System.out.println("DTr: " + accuracies[0]);
         System.out.println("RnF: " + accuracies[1]);
         System.out.println("Log: " + accuracies[2]);
         System.out.println("kNN: " + accuracies[3]);
         System.out.println("SVM: " + accuracies[4]);
+        System.out.println("Combined: " + 100d*((double)combinedPredictions/testDataReader.getAllInstances().numInstances()));
 
-    }
+    }*/
 
-    private svm_model build( BitStringChromosome chromosome) {
-        Instances instances = chromosome.getFeatureSubset(dataReader.getAllInstances());
-        return SVM.create(instances);
-    }
+    //private svm_model build( BitStringChromosome chromosome) {
+     //   Instances instances = chromosome.getFeatureSubset(dataReader.getAllInstances());
+     //   return SVM.create(instances);
+    //}
 
-    private Classifier build(Classifier model, BitStringChromosome chromosome) {
+    public Classifier build(Classifier model, BitStringChromosome chromosome) {
         Instances instances = chromosome.getFeatureSubset(dataReader.getAllInstances());
         try {
             model.buildClassifier(instances);

@@ -11,6 +11,10 @@ public class FeatureSelector {
     private DataReader dataReader;
     private int generation = 0;
 
+    public FeatureSelector(String file, int targetGeneration, int classificationMethod, GeneticParameters.ClassesToUse classesToUse) {
+        this(new DataReader(file), targetGeneration, 50, 0.6, GeneticParameters.DYNAMIC_MUTATION_METHOD_INVERSE_TOTAL_FEATURES,classificationMethod,classesToUse);
+    }
+
     public FeatureSelector(DataReader dataReader, int targetGeneration, int populationSize, double crossoverRate, int mutationRateMethod, int classificationMethod, GeneticParameters.ClassesToUse classesToUse) {
         this.dataReader = dataReader;
 
@@ -29,7 +33,7 @@ public class FeatureSelector {
 
         List<BitStringChromosome> population = new ArrayList<BitStringChromosome>();
         for (int i = 0; i < GeneticParameters.populationSize; i++)
-            population.add(new BitStringChromosome(dataReader.getFeatureCount()).init());
+            population.add(new BitStringChromosome(dataReader.getFeatureCount()).init(0.05));
 
         String params = GeneticParameters.toText();
         System.out.println(params);

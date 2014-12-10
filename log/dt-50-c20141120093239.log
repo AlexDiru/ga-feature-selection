@@ -1,8 +1,0 @@
-===Genetic Algorithm Feature Selector===
-Classification Method: Decision Tree
-Crossover Method: 1-point
-Validation Method: 10-fold Cross Validation
-Population Size: 50
-Crossover Rate: 0.6
-(Dynamic) Mutation Method: Constant (0.001)
-Number of Features: 335

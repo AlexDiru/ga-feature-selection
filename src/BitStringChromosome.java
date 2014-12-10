@@ -52,6 +52,12 @@ public class BitStringChromosome implements Comparable<BitStringChromosome>{
         return this;
     }
 
+    public BitStringChromosome init(double prob) {
+        for (int i = 0; i < size(); i++)
+            setBit(i, Math.random() < prob);
+        return this;
+    }
+
     public void setBit(int bitIndex, boolean value) {
         bits[bitIndex] = value;
     }

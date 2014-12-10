@@ -25,7 +25,7 @@ public class ParallelEvaluator implements Runnable {
 
     public double svm(BitStringChromosome chromosome) {
 
-        double accuracyTotal = 0;
+        /*double accuracyTotal = 0;
         for (int j = 0; j < dataReader.getTrainingInstances().length; j++) {
             Instances trInstances = chromosome.getFeatureSubset(dataReader.getTrainingInstances()[j]);
             Instances teInstances = chromosome.getFeatureSubset(dataReader.getTestInstances()[j]);
@@ -34,8 +34,8 @@ public class ParallelEvaluator implements Runnable {
             accuracyTotal += SVM.eval(model, teInstances);
         }
 
-        accuracyTotal /= dataReader.getTrainingInstances().length;
-        return accuracyTotal * 100;
+        accuracyTotal /= dataReader.getTrainingInstances().length;*/
+        return SVM.create(chromosome.getFeatureSubset(dataReader.getAllInstances()));
     }
 
     public double decisionTree(BitStringChromosome chromosome) {

@@ -91,8 +91,10 @@ public class DataReader {
     public DataReader(String dataFile) {
         try {
             //Sort out 'Instances' for Weka and k-fold cross validation
-            allInstances = (new ConverterUtils.DataSource("knimeout.csv")).getDataSet();
+            allInstances = (new ConverterUtils.DataSource(dataFile)).getDataSet();
             allInstances.setClassIndex(allInstances.numAttributes() - 1);
+
+            allInstances.stratify(K_FOLDS);
 
             //***OVA***
             Instances[][] split = crossValidationSplit(allInstances, K_FOLDS);
@@ -108,21 +110,23 @@ public class DataReader {
             allMCIandHC.delete();
 
             //Split data by class
-            for (int i = 0; i < allInstances.numInstances();i++)
-                switch ((int)allInstances.instance(i).classValue()) {
-                    case 0: //HC
-                        allMCIandHC.add(allInstances.instance(i));
+            for (int i = 0; i < allInstances.numInstances();i++) {
+                int c = (int)allInstances.instance(i).classValue();
+               if (c == 0) { //HC
+                   allMCIandHC.add(allInstances.instance(i));
+                   allHCandAD.add(allInstances.instance(i));
+               }
+               if (c == 1) { //MCI
+                   allMCIandHC.add(allInstances.instance(i));
+                   allMCIandAD.add(allInstances.instance(i));
+               }
+               if (c == 2) { //AD
                         allHCandAD.add(allInstances.instance(i));
-                        break;
-                    case 1: //MCI
-                        allMCIandHC.add(allInstances.instance(i));
                         allMCIandAD.add(allInstances.instance(i));
-                        break;
-                    case 2: //AD
-                        allHCandAD.add(allInstances.instance(i));
-                        allMCIandAD.add(allInstances.instance(i));
-                        break;
+
                 }
+            }
+            System.out.println(allInstances.numInstances());
 
             //Cross validation split
             Instances[][] splitMCIandHC = crossValidationSplit(allMCIandHC, K_FOLDS);
@@ -155,5 +159,17 @@ public class DataReader {
 
     public int getFeatureCount() {
         return trainingInstances[0].numAttributes() - 1;
+    }
+
+    public Instances getAllMCIandAD() {
+        return allMCIandAD;
+    }
+
+    public Instances getAllHCandAD() {
+        return allHCandAD;
+    }
+
+    public Instances getAllMCIandHC() {
+        return allMCIandHC;
     }
 }
